@@ -1,0 +1,89 @@
+.home-page {
+    font-size: small;
+    h2 {
+        font-size: 1.5em;
+    }
+    section {
+        margin: 3em auto;
+        &:first-child {
+            margin-top: 0;
+        }
+        &.centered {
+            text-align: center;
+        }
+    }
+    form {
+        margin-bottom: 1em;
+        input {
+            outline: none;
+            border-bottom: 1px dotted #999;
+        }
+    }
+    span.at-prefix {
+        color: black;
+        margin-left: 0.4em;
+    }
+    #tng-chart-container {
+        margin: 10px;
+    }
+    .vehicle-container {
+        display: table-row;
+    }
+    #vehicle-selectors {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .vehicle-selector {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 50%;
+    }
+    .vehicle-results-container {
+        display: table;
+    }
+    .vehicle-details {
+        display: table-row;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 50%;
+    }
+    .vehicle-image-container {
+        display: table-cell;
+        height: 60px;
+        width: 120px;
+        position: relative;
+        overflow: hidden;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .vehicle-image {
+        width: 120px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+    .vehicle-emission {
+        margin-top: 5px;
+        vertical-align: middle;
+    }
+    .vehicle-fuel {
+        margin-top: 5px;
+        vertical-align: middle;
+    }
+    .vehicle-headers {
+        display: table-row;
+        width: 100%
+    }
+    .vehicle-header {
+        display: table-cell;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
