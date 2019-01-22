@@ -30,12 +30,12 @@ import 'styles/theme.scss';
 
 import configureStore from './configureStore';
 
-// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
+// Observe loading of font (to remove it, remove the <link> tag in
 // the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Open Sans', {});
+const fontObserver = new FontFaceObserver('Roboto', {});
 
-// When Open Sans is loaded, add a font-family using Open Sans to the body
-openSansObserver.load().then(() => {
+// When font is loaded, add a font-family using it to the body
+fontObserver.load().then(() => {
   document.body.classList.add('fontLoaded');
 }, () => {
   document.body.classList.remove('fontLoaded');
