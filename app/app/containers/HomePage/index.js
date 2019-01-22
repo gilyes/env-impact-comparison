@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSelectedIceVehicleChanged: (vehicle) => {
     dispatch(changeSelectedIceVehicle(vehicle));
+  },
+  onReloadTNGRequested: () => {
+    dispatch(loadTNG());
   }
 });
 

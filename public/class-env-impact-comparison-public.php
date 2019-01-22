@@ -78,6 +78,7 @@ class EnvImpactComparison_Public
          */
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/env-impact-comparison-public.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . "_font_roboto", "https://fonts.googleapis.com/css?family=Roboto");
 
     }
 
@@ -109,6 +110,7 @@ class EnvImpactComparison_Public
                 $react_js_to_load = plugin_dir_url(__FILE__) . '../app/dist/' . $filename;
             }
         }
+        wp_enqueue_script($this->plugin_name . "_google_chart", "https://www.gstatic.com/charts/loader.js");
         wp_enqueue_script($this->plugin_name . "_react", $react_js_to_load, '', $this->version, true);
     }
 

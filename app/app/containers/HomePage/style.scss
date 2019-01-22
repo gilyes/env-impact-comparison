@@ -67,15 +67,16 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        z-index: -1;
     }
     .vehicle-emission {
         margin-top: 5px;
         vertical-align: middle;
+        color: #c0c0c0;
     }
     .vehicle-fuel {
         margin-top: 5px;
         vertical-align: middle;
+        color: #c0c0c0;
     }
     .vehicle-headers {
         display: table-row;

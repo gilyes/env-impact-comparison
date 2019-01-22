@@ -69,8 +69,7 @@ function appReducer(state = initialState, action) {
     case LOAD_TNG:
       return state
         .set('loading', true)
-        .set('error', false)
-        .setIn(['userData', 'tng'], {});
+        .set('error', false);
 
     case LOAD_TNG_SUCCESS:
       return state
