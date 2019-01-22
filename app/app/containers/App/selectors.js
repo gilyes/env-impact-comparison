@@ -33,11 +33,25 @@ const createTNGSelector = () => createSelector(
   (globalState) => globalState.getIn(['userData', 'tng'])
 );
 
+const createTNGForDisplaySelector = () => createSelector(
+  createTNGSelector(),
+  (tng) => {
+    if (!tng) {
+      return {};
+    }
+    // for display remove the total
+    const tngForDisplay = JSON.parse(JSON.stringify(tng));
+    delete tngForDisplay.total;
+    return tngForDisplay;
+  }
+);
+
 export {
   selectGlobal,
   createLoadingSelector,
   createErrorSelector,
   createElectricVehicleSelector,
   createIceVehicleSelector,
-  createTNGSelector
+  createTNGSelector,
+  createTNGForDisplaySelector
 };

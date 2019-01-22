@@ -29,7 +29,7 @@ class EnvImpactComparisonApi
 
             if (isset($typeNode)) {
                 $type = trim(strtolower($typeNode->textContent));
-                if ($type !== 'group' && $type !== 'total') {
+                if ($type !== 'group') {
                     $tng[$type] = $tngNode->textContent;
                 }
             }

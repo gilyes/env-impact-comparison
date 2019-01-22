@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import { createLoadingSelector, createErrorSelector, createElectricVehicleSelector, createIceVehicleSelector, createTNGSelector } from 'containers/App/selectors';
+import { createLoadingSelector, createErrorSelector, createElectricVehicleSelector, createIceVehicleSelector, createTNGForDisplaySelector } from 'containers/App/selectors';
 import { loadElectricVehicles, loadIceVehicles, loadTNG } from '../App/actions';
 import { changeSelectedElectricVehicle, changeSelectedIceVehicle } from './actions';
 import {
@@ -42,7 +42,7 @@ const mapStateToProps = createStructuredSelector({
   selectedElectricVehicleFuelConsumption: createElectricVehicleFuelConsumptionSelector(),
   selectedIceVehicleCarbonEquivalentEmitted: createIceVehicleCarbonEquivalentEmittedSelector(),
   selectedIceVehicleFuelConsumption: createIceVehicleFuelConsumptionSelector(),
-  tng: createTNGSelector(),
+  tng: createTNGForDisplaySelector(),
   error: createErrorSelector(),
 });
 

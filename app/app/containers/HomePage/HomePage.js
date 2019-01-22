@@ -10,9 +10,6 @@ import { Helmet } from 'react-helmet';
 import Select from 'react-select';
 import './style.scss';
 import ReactChartkick, { PieChart } from 'react-chartkick';
-import Chart from 'chart.js';
-
-ReactChartkick.addAdapter(Chart)
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -31,7 +28,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             <form>
               <div>
                 <div id="tng-chart-container">
-                  <PieChart data={this.props.tng} donut={true} height="200px" legend="right" width="300px" />
+                  <PieChart data={this.props.tng} donut={true} legend="right" />
                 </div>
                 <div id="vehicle-selectors">
                   <div className="vehicle-selector">
@@ -54,43 +51,33 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                       placeholder="Select ICE..." />
                   </div>
 
-                  {/* <div className="vehicle-results-container">
-                    {(this.props.selectedElectricVehicle || this.props.selectedIceVehicle) &&
-                      <div className="vehicle-headers">
-                        <div className="vehicle-header"></div>
-                        <div className="vehicle-header">Carbon Equivalent Emitted</div>
-                        <div className="vehicle-header">Fuel Consumption</div>
+                  {this.props.selectedElectricVehicle &&
+                    <div className="vehicle-details">
+                      <div className="vehicle-image-container">
+                        <img src={this.props.selectedElectricVehicle.pictureUrl} alt={this.props.selectedElectricVehicle.name} className="vehicle-image" />
                       </div>
-                    } */}
+                      <div className="vehicle-emission">
+                        <strong>{this.props.selectedElectricVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
+                        </div>
+                      <div className="vehicle-fuel">
+                        <strong>{this.props.selectedElectricVehicleFuelConsumption}</strong> L/100km equivalent
+                      </div>
+                    </div>
+                  }
 
-                    {this.props.selectedElectricVehicle &&
-                      <div className="vehicle-details">
-                        <div className="vehicle-image-container">
-                          <img src={this.props.selectedElectricVehicle.pictureUrl} alt={this.props.selectedElectricVehicle.name} className="vehicle-image" />
-                        </div>
-                        <div className="vehicle-emission">
-                          <strong>{this.props.selectedElectricVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
-                        </div>
-                        <div className="vehicle-fuel">
-                          <strong>{this.props.selectedElectricVehicleFuelConsumption}</strong> L/100km equivalent
+                  {this.props.selectedIceVehicle &&
+                    <div className="vehicle-details">
+                      <div className="vehicle-image-container">
+                        <img src={this.props.selectedIceVehicle.pictureUrl} alt={this.props.selectedIceVehicle.name} className="vehicle-image" />
                       </div>
-                      </div>
-                    }
-
-                    {this.props.selectedIceVehicle &&
-                      <div className="vehicle-details">
-                        <div className="vehicle-image-container">
-                          <img src={this.props.selectedIceVehicle.pictureUrl} alt={this.props.selectedIceVehicle.name} className="vehicle-image" />
+                      <div className="vehicle-emission">
+                        <strong>{this.props.selectedIceVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
                         </div>
-                        <div className="vehicle-emission">
-                          <strong>{this.props.selectedIceVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
-                        </div>
-                        <div className="vehicle-fuel">
-                          <strong>{this.props.selectedIceVehicleFuelConsumption}</strong> L/100km
+                      <div className="vehicle-fuel">
+                        <strong>{this.props.selectedIceVehicleFuelConsumption}</strong> L/100km
                       </div>
-                      </div>
-                    }
-                  {/* </div> */}
+                    </div>
+                  }
                 </div>
               </div>
             </form>
