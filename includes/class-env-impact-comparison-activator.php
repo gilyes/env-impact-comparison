@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       
+ * @link
  * @since      1.0.0
  *
  * @package    EnvImpactComparison
@@ -20,17 +20,20 @@
  * @subpackage EnvImpactComparison/includes
  * @author     George Ilyes  <a@a.com>
  */
-class EnvImpactComparison_Activator {
+class EnvImpactComparison_Activator
+{
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
-
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function activate()
+    {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
+        EnvImpactComparisonDataAccess::createDatabase();
+    }
 
 }

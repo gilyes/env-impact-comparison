@@ -60,7 +60,7 @@ function deactivate_env_impact_comparison()
 register_activation_hook(__FILE__, 'activate_env_impact_comparison');
 register_deactivation_hook(__FILE__, 'deactivate_env_impact_comparison');
 
-require_once plugin_dir_path(__FILE__) . 'api.php';
+require_once plugin_dir_path(__FILE__) . 'includes/api.php';
 add_action('rest_api_init', function () {
     register_rest_route('env-impact-comparison/v1', '/electricvehicles', array(
         'methods' => 'GET',

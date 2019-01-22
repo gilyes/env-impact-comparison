@@ -1,26 +1,44 @@
 <?php
 
+require_once 'data-access.php';
+
 class EnvImpactComparisonApi
 {
     public static function getElectricVehicles($request)
     {
-        return self::readVehicles(plugin_dir_path(__FILE__) . "data/ev.csv");
+        return self::readVehicles(plugin_dir_path(__FILE__) . "../data/ev.csv");
     }
 
     public static function getIceVehicles($request)
     {
-        return self::readVehicles(plugin_dir_path(__FILE__) . "data/ice.csv");
+        return self::readVehicles(plugin_dir_path(__FILE__) . "../data/ice.csv");
     }
 
     public static function getTNG($request)
     {
-        $htmlContent = file_get_contents("http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet");
+        $cachedTNG = EnvImpactComparisonDataAccess::getTNG();
+        $tng = [];
+        if (isset($cachedTNG)) {
+            $tng = json_decode($cachedTNG->tng);
+
+            $minTime = new DateTime();
+            $minTime->modify("-2 minutes");
+            $cacheTime = new DateTime($cachedTNG->time);
+            if ($cacheTime > $minTime) {
+                return json_decode($cachedTNG->tng);
+            }
+        }
+
+        @$htmlContent = file_get_contents("http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet");
+        if ($htmlContent === false) {
+            return $tng;
+        }
+
         $dom = new DOMDocument();
         @$dom->loadHTML($htmlContent);
 
         $xpath = new DOMXPath($dom);
 
-        $tng = [];
         foreach ($xpath->query("//table[tr/th[1] = 'GENERATION']")->item(0)->getElementsByTagName('tr') as $rows) {
             $cells = $rows->getElementsByTagName('td');
 
@@ -34,6 +52,8 @@ class EnvImpactComparisonApi
                 }
             }
         }
+
+        EnvImpactComparisonDataAccess::saveTNG($tng);
 
         return $tng;
     }
