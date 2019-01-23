@@ -2,22 +2,22 @@
 
 require_once 'data-access.php';
 
-class EnvImpactComparisonApi
+class EnvImpactComparison_Api
 {
-    public static function getElectricVehicles($request)
+    public static function get_electric_vehicles($request)
     {
-        return self::readVehicles(plugin_dir_path(__FILE__) . "../data/ev.csv");
+        return self::read_vehicles(plugin_dir_path(__FILE__) . "../data/ev.csv");
     }
 
-    public static function getIceVehicles($request)
+    public static function get_ice_vehicles($request)
     {
-        return self::readVehicles(plugin_dir_path(__FILE__) . "../data/ice.csv");
+        return self::read_vehicles(plugin_dir_path(__FILE__) . "../data/ice.csv");
     }
 
-    public static function getTNG($request)
+    public static function get_tng($request)
     {
-        $cachedTNG = EnvImpactComparisonDataAccess::getTNG();
-        $tng = [];
+        $cachedTNG = EnvImpactComparison_DataAccess::getTNG();
+        $tng = new stdClass;
         if (isset($cachedTNG)) {
             $tng = json_decode($cachedTNG->tng);
 
@@ -48,17 +48,17 @@ class EnvImpactComparisonApi
             if (isset($typeNode)) {
                 $type = trim(strtolower($typeNode->textContent));
                 if ($type !== 'group') {
-                    $tng[$type] = $tngNode->textContent;
+                    $tng->{$type} = $tngNode->textContent;
                 }
             }
         }
 
-        EnvImpactComparisonDataAccess::saveTNG($tng);
+        EnvImpactComparison_DataAccess::saveTNG($tng);
 
         return $tng;
     }
 
-    public static function readVehicles($fileName)
+    public static function read_vehicles($fileName)
     {
         $csv = array_map('str_getcsv', file($fileName));
 

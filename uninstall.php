@@ -18,11 +18,6 @@
  *
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
- *
- * @link       
- * @since      1.0.0
- *
- * @package    EnvImpactComparison
  */
 
 // If uninstall not called from WordPress, then exit.

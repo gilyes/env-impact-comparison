@@ -1,6 +1,6 @@
 <?php
 
-class EnvImpactComparisonDataAccess
+class EnvImpactComparison_DataAccess
 {
     public static function createDatabase()
     {
