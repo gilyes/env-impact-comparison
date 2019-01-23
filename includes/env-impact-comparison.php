@@ -55,7 +55,10 @@ class EnvImpactComparison
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-        $this->loader->add_action('admin_menu', $plugin_admin, 'register_admin_page');
+        $this->loader->add_action('admin_init', $plugin_admin, 'register_admin_page');
+		$this->loader->add_action('admin_menu', $plugin_admin, 'admin_menu_item');
+
+        $this->loader->add_filter("plugin_action_links_$this->plugin_name/main.php", $plugin_admin, 'add_settings_link');
     }
 
     private function define_public_hooks()
