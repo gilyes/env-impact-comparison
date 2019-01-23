@@ -6,17 +6,17 @@ class EnvImpactComparison_Api
 {
     public static function get_electric_vehicles($request)
     {
-        return self::read_vehicles(plugin_dir_path(__FILE__) . "../data/ev.csv");
+        return EnvImpactComparison_DataAccess::get_electric_vehicles();
     }
 
     public static function get_ice_vehicles($request)
     {
-        return self::read_vehicles(plugin_dir_path(__FILE__) . "../data/ice.csv");
+        return EnvImpactComparison_DataAccess::get_ice_vehicles();
     }
 
     public static function get_tng($request)
     {
-        $cachedTNG = EnvImpactComparison_DataAccess::getTNG();
+        $cachedTNG = EnvImpactComparison_DataAccess::get_tng();
         $tng = new stdClass;
         if (isset($cachedTNG)) {
             $tng = json_decode($cachedTNG->tng);
@@ -53,7 +53,7 @@ class EnvImpactComparison_Api
             }
         }
 
-        EnvImpactComparison_DataAccess::saveTNG($tng);
+        EnvImpactComparison_DataAccess::save_tng($tng);
 
         return $tng;
     }

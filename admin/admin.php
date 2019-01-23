@@ -48,23 +48,41 @@ class EnvImpactComparison_Admin
         if (!empty($_FILES["electric-vehicles-csv"]["tmp_name"])) {
             $content = $this->read_uploaded_file($_FILES["electric-vehicles-csv"]);
             if (isset($content)) {
-                // TODO: save to db
+                require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
+                $vehicles = self::csv_to_vehicle_array($content);
+                EnvImpactComparison_DataAccess::save_electric_vehicles($vehicles);
             }
         }
 
         return $option;
     }
 
-    public function handle_electric_ice_upload($option)
+    public function handle_ice_vehicles_upload($option)
     {
-        if (!empty($_FILES["electric-ice-csv"]["tmp_name"])) {
+        if (!empty($_FILES["ice-vehicles-csv"]["tmp_name"])) {
             $content = $this->read_uploaded_file($_FILES["ice-vehicles-csv"]);
             if (isset($content)) {
-                // TODO: save to db
+                require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
+                $vehicles = self::csv_to_vehicle_array($content);
+                EnvImpactComparison_DataAccess::save_ice_vehicles($vehicles);
             }
         }
 
         return $option;
+    }
+
+    private static function csv_to_vehicle_array($text)
+    {
+        $csv = array_map('str_getcsv', preg_split("/\r\n|\n|\r/", $text));
+        $vehicles = [];
+        foreach ($csv as $vehicle) {
+            array_push($vehicles, (object) [
+                'name' => $vehicle[0],
+                'consumption' => $vehicle[1],
+                'pictureUrl' => $vehicle[2],
+            ]);
+        }
+        return $vehicles;
     }
 
     public function admin_display()
