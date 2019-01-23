@@ -67,7 +67,10 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             <form>
               <div>
                 <div id="tng-chart-container">
-                  <PieChart data={this.props.tng} donut={true} legend="right" library={{ backgroundColor: "transparent" }} />
+                  <PieChart data={this.props.tng} donut={true} legend="right" library={{
+                    backgroundColor: "transparent",
+                    chartArea: { 'width': '100%', 'height': '80%' }
+                  }} />
                 </div>
                 <div id="vehicle-selectors">
                   <div className="vehicle-selector">
