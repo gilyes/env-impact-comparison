@@ -31,8 +31,8 @@ class EnvImpactComparison_Admin
     public function register_admin_page()
     {
         add_settings_section("env_impact_comparison_settings", "Settings", null, "env_impact_comparison");
-        add_settings_field("electric-vehicles-csv", "Upload EV CSV", array($this, "electric_vehicles_upload"), "env_impact_comparison", "env_impact_comparison_settings");
-        add_settings_field("ics-vehicles-csv", "Upload ICS CSV", array($this, "ice_vehicles_upload"), "env_impact_comparison", "env_impact_comparison_settings");
+        add_settings_field("electric-vehicles-csv", "Upload Electric Vehicles (CSV)", array($this, "electric_vehicles_upload"), "env_impact_comparison", "env_impact_comparison_settings");
+        add_settings_field("ics-vehicles-csv", "Upload ICE Vehicles (CSV)", array($this, "ice_vehicles_upload"), "env_impact_comparison", "env_impact_comparison_settings");
         register_setting("env_impact_comparison_settings", "electric-vehicles-csv", array($this, "handle_electric_vehicles_upload"));
         register_setting("env_impact_comparison_settings", "ice-vehicles-csv", array($this, "handle_ice_vehicles_upload"));
     }
@@ -50,7 +50,9 @@ class EnvImpactComparison_Admin
             if (isset($content)) {
                 require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
                 $vehicles = self::csv_to_vehicle_array($content);
-                EnvImpactComparison_DataAccess::save_electric_vehicles($vehicles);
+                if (isset($vehicles)) {
+                    EnvImpactComparison_DataAccess::save_electric_vehicles($vehicles);
+                }
             }
         }
 
@@ -64,7 +66,9 @@ class EnvImpactComparison_Admin
             if (isset($content)) {
                 require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
                 $vehicles = self::csv_to_vehicle_array($content);
-                EnvImpactComparison_DataAccess::save_ice_vehicles($vehicles);
+                if (isset($vehicles)) {
+                    EnvImpactComparison_DataAccess::save_ice_vehicles($vehicles);
+                }
             }
         }
 
@@ -75,13 +79,25 @@ class EnvImpactComparison_Admin
     {
         $csv = array_map('str_getcsv', preg_split("/\r\n|\n|\r/", $text));
         $vehicles = [];
-        foreach ($csv as $vehicle) {
-            array_push($vehicles, (object) [
-                'name' => $vehicle[0],
-                'consumption' => $vehicle[1],
-                'pictureUrl' => $vehicle[2],
-            ]);
+        try {
+            foreach ($csv as $vehicle) {
+                if (count($vehicle) < 3) {
+                    add_settings_error('env_impact_comparison_settings', esc_attr('settings_updated'), "Invalid CSV, must have 3 columns (name, consumption, pictureUrl).", 'error');
+                    return null;
+                }
+
+                array_push($vehicles, (object) [
+                    'name' => $vehicle[0],
+                    'consumption' => $vehicle[1],
+                    'pictureUrl' => $vehicle[2],
+                ]);
+            }
+        } catch (Exception $e) {
+            add_settings_error('env_impact_comparison_settings', esc_attr('settings_updated'), "Something went wrong: $e", 'error');
+
+            return null;
         }
+
         return $vehicles;
     }
 
@@ -89,11 +105,12 @@ class EnvImpactComparison_Admin
     {
         echo '
       	<div class="wrap">
-        <h1>Environmental Impact Comparison - Configuration</h1>
+        <h1>Environmental Impact Comparison</h1>
 		<form method="post" action="options.php" enctype="multipart/form-data">';
 
         settings_fields("env_impact_comparison_settings");
         do_settings_sections("env_impact_comparison");
+        echo '<p>Select one or both files then <b>press Save Changes</b> to update the list of vehicles.</p>';
         submit_button();
 
         echo '</form></div>';
@@ -101,14 +118,12 @@ class EnvImpactComparison_Admin
 
     public function electric_vehicles_upload()
     {
-        echo '<input type="file" name="electric-vehicles-csv" />';
-        echo get_option('electric-vehicles-csv');
+        echo '<input type="file" name="electric-vehicles-csv" accept=".csv" />';
     }
 
     public function ice_vehicles_upload()
     {
-        echo '<input type="file" name="ice-vehicles-csv" />';
-        echo get_option('ice-vehicles-csv');
+        echo '<input type="file" name="ice-vehicles-csv" accept=".csv" />';
     }
 
     public function add_settings_link($links)

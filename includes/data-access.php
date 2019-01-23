@@ -84,7 +84,7 @@ class EnvImpactComparison_DataAccess
     public static function save_electric_vehicles($electric_vehicles)
     {
         $table_name = self::get_electric_vehicles_table_name();
-        self::save_vehicles($ice_vehicles, $table_name);
+        self::save_vehicles($electric_vehicles, $table_name);
     }
 
     public static function get_electric_vehicles()
