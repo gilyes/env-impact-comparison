@@ -33,8 +33,17 @@ function deactivate_env_impact_comparison()
     EnvImpactComparison_Deactivator::deactivate();
 }
 
+function setup_env_impact_comparison_update_checker()
+{
+    require_once plugin_dir_path(__FILE__) . 'utils/plugin-update-checker/plugin-update-checker.php';
+    $updateChecker = Puc_v4_Factory::buildUpdateChecker('https://github.com/gilyes/env-impact-comparison', __FILE__, 'env-impact-comparison');
+    $updateChecker->getVcsApi()->enableReleaseAssets();
+}
+
 register_activation_hook(__FILE__, 'activate_env_impact_comparison');
 register_deactivation_hook(__FILE__, 'deactivate_env_impact_comparison');
+
+setup_env_impact_comparison_update_checker();
 
 require plugin_dir_path(__FILE__) . 'includes/env-impact-comparison.php';
 
