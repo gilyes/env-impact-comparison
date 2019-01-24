@@ -16,7 +16,7 @@ WordPress plugin that displays and compares the environmental impact of various 
 The functionality is implemented as a React/Redux application:
 
 * The source for this is in the `/app` directory.
-* The plugin uses the production build which is located in `/app/dist`.
+* The plugin uses the production build which is generated in `/app/dist`.
 
 #### Building the React app
 
