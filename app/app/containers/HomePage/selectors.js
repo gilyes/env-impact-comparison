@@ -38,13 +38,13 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
 );
 
 const createElectricVehicleFuelConsumptionSelector = () => createSelector(
-  createSelectedElectricVehicleSelector(),
-  (vehicle) => {
-    if (!vehicle || !vehicle.consumption) {
+  createElectricVehicleCarbonEquivalentEmittedSelector(),
+  (carbonEquivalentEmitted) => {
+    if (carbonEquivalentEmitted === "N/A") {
       return "N/A";
     }
 
-    return round(vehicle.consumption / 2.44, 1);
+    return round(carbonEquivalentEmitted / 2.44, 1);
   }
 );
 

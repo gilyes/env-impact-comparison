@@ -19,6 +19,9 @@ Displays and compares the environmental impact of various electric and gas vehic
 CSV format: vehicle_name, consumption (number), picture_url
  
 == Changelog ==
+
+= 1.0.1 =
+* Fix EV equivalent L/100km formula.
  
 = 1.0 =
 * Initial release.
