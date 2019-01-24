@@ -43,7 +43,9 @@ function setup_env_impact_comparison_update_checker()
 register_activation_hook(__FILE__, 'activate_env_impact_comparison');
 register_deactivation_hook(__FILE__, 'deactivate_env_impact_comparison');
 
-setup_env_impact_comparison_update_checker();
+// update checker disabled for now as the github checker does not seem to support uploaded zip but
+// uses the source code zip which does not include the React app dist.
+// setup_env_impact_comparison_update_checker();
 
 require plugin_dir_path(__FILE__) . 'includes/env-impact-comparison.php';
 
