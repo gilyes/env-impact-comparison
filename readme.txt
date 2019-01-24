@@ -20,6 +20,9 @@ CSV format: vehicle_name, consumption (number), picture_url
  
 == Changelog ==
 
+= 1.0.2 =
+* Tweak chart config.
+
 = 1.0.1 =
 * Fix EV equivalent L/100km formula.
  
