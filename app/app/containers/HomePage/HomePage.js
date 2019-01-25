@@ -70,6 +70,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                   <PieChart data={this.props.tng} donut={true} legend="right" library={{
                     backgroundColor: "transparent",
                     fontSize: "14",
+                    pieHole: 0.45,
                     legend: { textStyle: { color: '#eeeeee', fontSize: "16" } },
                     chartArea: { top: 9, bottom: 9, left: 5, right: 5},
                     tooltip: { text: 'percentage', showColorCode: true }
