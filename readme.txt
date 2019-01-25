@@ -15,16 +15,19 @@ Displays and compares the environmental impact of various electric and gas vehic
 1. Upload plugin.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Upload EV/ICE CSV files on the plugin settings page.
-
-CSV format: vehicle_name, consumption (number), picture_url
+  * CSV format: vehicle_name, consumption (number), picture_url
  
 == Changelog ==
 
+= 1.0.3 =
+* Added update checker.
+* Tweaked padding, chart config.
+
 = 1.0.2 =
-* Tweak chart config.
+* Tweaked chart config.
 
 = 1.0.1 =
-* Fix EV equivalent L/100km formula.
+* Fixed EV equivalent L/100km formula.
  
 = 1.0 =
 * Initial release.
