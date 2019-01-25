@@ -110,7 +110,10 @@ class EnvImpactComparison_Admin
 
         settings_fields("env_impact_comparison_settings");
         do_settings_sections("env_impact_comparison");
+
+        echo '<h3>Instructions</h3>';
         echo '<p>Select one or both files then <b>press Save Changes</b> to update the list of vehicles.</p>';
+        echo '<p>The format of these CSV files is: <code>vehicle_name, consumption (number), picture_url</code>. Do not include column headers in the files.</p>';
         submit_button();
 
         echo '</form></div>';
