@@ -9,7 +9,7 @@ import {
 describe('selectHome', () => {
   it('should select the home state', () => {
     const homeState = fromJS({
-      userData: {},
+      data: {},
     });
     const mockedState = fromJS({
       home: homeState,

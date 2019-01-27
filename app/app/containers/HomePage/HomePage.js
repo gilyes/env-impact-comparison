@@ -111,7 +111,10 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                           <strong>{this.props.selectedElectricVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
                         </div>
                         <div className="vehicle-fuel">
-                          <strong>{this.props.selectedElectricVehicleFuelConsumption}</strong> L/100km equivalent
+                          <strong>{this.props.selectedElectricVehicleEfficiency}</strong> L/100km efficiency
+                        </div>
+                        <div className="vehicle-fuel">
+                          <strong>{this.props.selectedElectricVehicleGHG}</strong> L/100km GHG
                         </div>
                       </div>
                     }
@@ -127,7 +130,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                           <strong>{this.props.selectedIceVehicleCarbonEquivalentEmitted}</strong> kg CO2e/100km
                         </div>
                         <div className="vehicle-fuel">
-                          <strong>{this.props.selectedIceVehicleFuelConsumption}</strong> L/100km
+                          <strong>{this.props.selectedIceVehicleEfficiency}</strong> L/100km efficiency
                         </div>
                       </div>
                     }

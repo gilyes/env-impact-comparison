@@ -8,7 +8,7 @@ describe('appReducer', () => {
     state = fromJS({
       loading: false,
       error: false,
-      userData: fromJS({
+      data: fromJS({
       }),
     });
   });

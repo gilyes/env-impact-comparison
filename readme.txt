@@ -19,6 +19,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.0.4 =
+* Separated EV values into efficiency and GHG.
+
 = 1.0.3 =
 * Added update checker.
 * Tweaked padding, chart config.

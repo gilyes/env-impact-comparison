@@ -37,7 +37,19 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
   }
 );
 
-const createElectricVehicleFuelConsumptionSelector = () => createSelector(
+const createElectricVehicleEfficiencySelector = () => createSelector(
+  createSelectedElectricVehicleSelector(),
+  (vehicle) => {
+    if (!vehicle) {
+      return "N/A";
+    }
+
+    // 235.21/(3370.5/1.609344/'kwh/100km'
+    return round(235.21/(3370.5/1.609344/vehicle.consumption), 1);
+  }
+);
+
+const createElectricVehicleGHGSelector = () => createSelector(
   createElectricVehicleCarbonEquivalentEmittedSelector(),
   (carbonEquivalentEmitted) => {
     if (carbonEquivalentEmitted === "N/A") {
@@ -59,7 +71,7 @@ const createIceVehicleCarbonEquivalentEmittedSelector = () => createSelector(
   }
 );
 
-const createIceVehicleFuelConsumptionSelector = () => createSelector(
+const createIceVehicleEfficiencySelector = () => createSelector(
   createSelectedIceVehicleSelector(),
   (vehicle) => {
     if (!vehicle || !vehicle.consumption) {
@@ -79,7 +91,8 @@ export {
   createSelectedElectricVehicleSelector,
   createSelectedIceVehicleSelector,
   createElectricVehicleCarbonEquivalentEmittedSelector,
-  createElectricVehicleFuelConsumptionSelector,
+  createElectricVehicleEfficiencySelector,
+  createElectricVehicleGHGSelector,
   createIceVehicleCarbonEquivalentEmittedSelector,
-  createIceVehicleFuelConsumptionSelector
+  createIceVehicleEfficiencySelector
 };

@@ -10,9 +10,10 @@ import {
   createSelectedElectricVehicleSelector,
   createSelectedIceVehicleSelector,
   createElectricVehicleCarbonEquivalentEmittedSelector,
-  createElectricVehicleFuelConsumptionSelector,
+  createElectricVehicleEfficiencySelector,
+  createElectricVehicleGHGSelector,
   createIceVehicleCarbonEquivalentEmittedSelector,
-  createIceVehicleFuelConsumptionSelector,
+  createIceVehicleEfficiencySelector,
 } from './selectors';
 import reducer from './reducer';
 import { electricVehiclesSaga, iceVehiclesSaga, tngSaga } from './saga';
@@ -42,9 +43,10 @@ const mapStateToProps = createStructuredSelector({
   selectedElectricVehicle: createSelectedElectricVehicleSelector(),
   selectedIceVehicle: createSelectedIceVehicleSelector(),
   selectedElectricVehicleCarbonEquivalentEmitted: createElectricVehicleCarbonEquivalentEmittedSelector(),
-  selectedElectricVehicleFuelConsumption: createElectricVehicleFuelConsumptionSelector(),
+  selectedElectricVehicleEfficiency: createElectricVehicleEfficiencySelector(),
+  selectedElectricVehicleGHG: createElectricVehicleGHGSelector(),
   selectedIceVehicleCarbonEquivalentEmitted: createIceVehicleCarbonEquivalentEmittedSelector(),
-  selectedIceVehicleFuelConsumption: createIceVehicleFuelConsumptionSelector(),
+  selectedIceVehicleEfficiency: createIceVehicleEfficiencySelector(),
   tng: createTNGForDisplaySelector(),
   error: createErrorSelector(),
 });

@@ -20,17 +20,17 @@ const createErrorSelector = () => createSelector(
 
 const createElectricVehicleSelector = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'electricVehicles'])
+  (globalState) => globalState.getIn(['data', 'electricVehicles'])
 );
 
 const createIceVehicleSelector = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'iceVehicles'])
+  (globalState) => globalState.getIn(['data', 'iceVehicles'])
 );
 
 const createTNGSelector = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'tng'])
+  (globalState) => globalState.getIn(['data', 'tng'])
 );
 
 const createTNGForDisplaySelector = () => createSelector(

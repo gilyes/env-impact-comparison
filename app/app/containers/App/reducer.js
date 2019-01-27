@@ -28,7 +28,7 @@ import {
 const initialState = fromJS({
   loading: false,
   error: false,
-  userData: {
+  data: {
   },
 });
 
@@ -38,11 +38,11 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData', 'electricVehicles'], []);
+        .setIn(['data', 'electricVehicles'], []);
 
     case LOAD_ELECTRIC_VEHICLES_SUCCESS:
       return state
-        .setIn(['userData', 'electricVehicles'], action.vehicles)
+        .setIn(['data', 'electricVehicles'], action.vehicles)
         .set('loading', false);
 
     case LOAD_ELECTRIC_VEHICLES_ERROR:
@@ -54,11 +54,11 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData', 'iceVehicles'], []);
+        .setIn(['data', 'iceVehicles'], []);
 
     case LOAD_ICE_VEHICLES_SUCCESS:
       return state
-        .setIn(['userData', 'iceVehicles'], action.vehicles)
+        .setIn(['data', 'iceVehicles'], action.vehicles)
         .set('loading', false);
 
     case LOAD_ICE_VEHICLES_ERROR:
@@ -73,7 +73,7 @@ function appReducer(state = initialState, action) {
 
     case LOAD_TNG_SUCCESS:
       return state
-        .setIn(['userData', 'tng'], action.tng)
+        .setIn(['data', 'tng'], action.tng)
         .set('loading', false);
 
     case LOAD_TNG_ERROR:

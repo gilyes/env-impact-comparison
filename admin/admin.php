@@ -77,6 +77,7 @@ class EnvImpactComparison_Admin
 
     private static function csv_to_vehicle_array($text)
     {
+        $text = trim($text);
         $csv = array_map('str_getcsv', preg_split("/\r\n|\n|\r/", $text));
         $vehicles = [];
         try {

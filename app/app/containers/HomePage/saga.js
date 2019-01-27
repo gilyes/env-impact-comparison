@@ -3,7 +3,7 @@ import { electricVehiclesLoaded, electricVehiclesLoadError, iceVehiclesLoaded, i
 
 import request from 'utils/request';
 import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG } from '../App/constants';
-import { createElectricVehicleFuelConsumptionSelector } from './selectors';
+import { createElectricVehicleEfficiencySelector } from './selectors';
 
 export function* getElectricVehicles() {
   try {
