@@ -3,18 +3,26 @@
  */
 
 import { createSelector } from 'reselect';
-import { createTNGSelector } from '../App/selectors';
+import { createTNGSelector, selectGlobal } from '../App/selectors';
+import { formValueSelector } from 'redux-form/immutable';
+import { toJS } from 'immutable';
 
 const selectHome = (state) => state.get('home');
 
 const createSelectedElectricVehicleSelector = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('selectedElectricVehicle')
+  (state) => {
+    const result = state.get('selectedElectricVehicle')
+    return result ? result.toJS() : null;
+  }
 );
 
 const createSelectedIceVehicleSelector = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('selectedIceVehicle')
+  (state) => {
+    const result = state.get('selectedIceVehicle');
+    return result ? result.toJS() : null;
+  }
 );
 
 const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelector(
@@ -45,7 +53,7 @@ const createElectricVehicleEfficiencySelector = () => createSelector(
     }
 
     // 235.21/(3370.5/1.609344/'kwh/100km'
-    return round(235.21/(3370.5/1.609344/vehicle.consumption), 1);
+    return round(235.21 / (3370.5 / 1.609344 / vehicle.consumption), 1);
   }
 );
 
@@ -82,6 +90,40 @@ const createIceVehicleEfficiencySelector = () => createSelector(
   }
 );
 
+const selectCostComparisonForm = formValueSelector('costComparisonForm');
+
+const selectAnnualDistanceDriven = (state) => selectCostComparisonForm(state, "annualDistanceDriven");
+
+const selectFuelCost = (state) => selectCostComparisonForm(state, "fuelCost");
+
+const selectElectricityRate = (state) => selectCostComparisonForm(state, "electricityRate");
+
+const createElectricVehicleAnnualCostSelector = () => createSelector(
+  selectAnnualDistanceDriven,
+  selectElectricityRate,
+  createSelectedElectricVehicleSelector(),
+  (annualDistanceDriven, electricityRate, vehicle) => {
+    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(electricityRate)) {
+      return "N/A";
+    }
+
+    return round(vehicle.consumption * annualDistanceDriven * electricityRate / 10000.0, 0);
+  }
+);
+
+const createIceVehicleAnnualCostSelector = () => createSelector(
+  selectAnnualDistanceDriven,
+  selectFuelCost,
+  createSelectedIceVehicleSelector(),
+  (annualDistanceDriven, fuelCost, vehicle) => {
+    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(fuelCost)) {
+      return "N/A";
+    }
+
+    return round(vehicle.consumption * annualDistanceDriven * fuelCost / 100.0, 0);
+  }
+);
+
 function round(value, decimals) {
   return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
 }
@@ -94,5 +136,10 @@ export {
   createElectricVehicleEfficiencySelector,
   createElectricVehicleGHGSelector,
   createIceVehicleCarbonEquivalentEmittedSelector,
-  createIceVehicleEfficiencySelector
+  createIceVehicleEfficiencySelector,
+  selectAnnualDistanceDriven,
+  selectFuelCost,
+  selectElectricityRate,
+  createElectricVehicleAnnualCostSelector,
+  createIceVehicleAnnualCostSelector
 };

@@ -14,6 +14,11 @@ import {
   createElectricVehicleGHGSelector,
   createIceVehicleCarbonEquivalentEmittedSelector,
   createIceVehicleEfficiencySelector,
+  selectAnnualDistanceDriven,
+  selectFuelCost,
+  selectElectricityRate,
+  createElectricVehicleAnnualCostSelector,
+  createIceVehicleAnnualCostSelector
 } from './selectors';
 import reducer from './reducer';
 import { electricVehiclesSaga, iceVehiclesSaga, tngSaga } from './saga';
@@ -48,6 +53,11 @@ const mapStateToProps = createStructuredSelector({
   selectedIceVehicleCarbonEquivalentEmitted: createIceVehicleCarbonEquivalentEmittedSelector(),
   selectedIceVehicleEfficiency: createIceVehicleEfficiencySelector(),
   tng: createTNGForDisplaySelector(),
+  annualDistanceDriven: selectAnnualDistanceDriven,
+  fuelCost: selectFuelCost,
+  electricityRate: selectElectricityRate,
+  electricVehicleAnnualCost: createElectricVehicleAnnualCostSelector(),
+  iceVehicleAnnualCost: createIceVehicleAnnualCostSelector(),
   error: createErrorSelector(),
 });
 

@@ -27,7 +27,7 @@
     "pretest_disabled": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll"
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll --runInBand"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
@@ -55,6 +55,7 @@
     "react-router-redux": "5.0.0-alpha.6",
     "react-select": "^2.2.0",
     "redux": "3.7.2",
+    "redux-form": "^8.1.0",
     "redux-immutable": "4.0.0",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",

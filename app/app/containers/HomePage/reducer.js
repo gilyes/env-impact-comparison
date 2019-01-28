@@ -20,10 +20,10 @@ const initialState = fromJS({
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_SELECTED_ELECTRIC_VEHICLE:
-      return state.set('selectedElectricVehicle', action.vehicle);
+      return state.set('selectedElectricVehicle', fromJS(action.vehicle));
 
     case CHANGE_SELECTED_ICE_VEHICLE:
-      return state.set('selectedIceVehicle', action.vehicle);
+      return state.set('selectedIceVehicle', fromJS(action.vehicle));
 
     default:
       return state;

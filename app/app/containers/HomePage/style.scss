@@ -17,6 +17,15 @@
         input {
             outline: none;
             border-bottom: 1px dotted #999;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            background: #101010;
+            padding: 2px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        input[type="text"]:focus {
+            outline: none;
         }
     }
     span.at-prefix {
@@ -29,7 +38,7 @@
     .vehicle-container {
         display: table-row;
     }
-    #vehicle-selectors {
+    .vehicle-selectors {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -51,15 +60,23 @@
         padding-left: 10px;
         padding-right: 10px;
         width: 50%;
+        text-align: center;
+    }
+    .vehicle-details>div {
+        background: #212121;
+        padding-left: 5px;
+        padding-bottom: 5px;
+        border-radius: 7px;
     }
     .vehicle-image-container {
-        display: table-cell;
         height: 60px;
         width: 120px;
         position: relative;
         overflow: hidden;
         padding-left: 10px;
         padding-right: 10px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .vehicle-image {
         width: 120px;
@@ -71,12 +88,10 @@
     .vehicle-emission {
         margin-top: 5px;
         vertical-align: middle;
-        color: #c0c0c0;
     }
     .vehicle-fuel {
         margin-top: 5px;
         vertical-align: middle;
-        color: #c0c0c0;
     }
     .vehicle-headers {
         display: table-row;
@@ -87,8 +102,48 @@
         padding-left: 10px;
         padding-right: 10px;
     }
-    // HACK: working around a bug in Google Chart that causes flickering tooltip. from https://stackoverflow.com/a/39775254/573447
+    .cost-comparison-container {
+        display: table-row;
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+        input[type=text] {
+            width: 50px;
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+    }
+    .cost-comparison-header {
+        display: table-row;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 1.4em;
+        width: 100%;
+    }
+    .cost-comparison-inputs {
+        line-height: 1.9
+    }
+    .cost-comparison-result-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .vehicle-annual-cost {
+        background: #212121;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    #annual-cost-chart-container {
+        width: 400px;
+        margin-top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     svg[aria-label="A chart."]>g>g:last-child {
+        // HACK: working around a bug in Google Chart that causes flickering tooltip. from https://stackoverflow.com/a/39775254/573447
         pointer-events: none
     }
 }
