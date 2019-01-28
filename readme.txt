@@ -21,6 +21,7 @@ Displays and compares the environmental impact of various electric and gas vehic
 
 = 1.0.4 =
 * Separated EV values into efficiency and GHG.
+* Added annual cost comparison.
 
 = 1.0.3 =
 * Added update checker.
