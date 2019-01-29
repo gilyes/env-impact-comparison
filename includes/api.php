@@ -58,6 +58,16 @@ class EnvImpactComparison_Api
         return $tng;
     }
 
+    public static function get_cost_comparison_defaults()
+    {
+        $options = get_option('env_impact_comparison_settings', array());
+        return (object) [
+            'annualDistanceDriven' => $options['default_annual_distance_driven'] ?? '',
+            'fuelCost' => $options['default_fuel_cost'] ?? '',
+            'electricityRate' => $options['default_electricity_rate'] ?? '',
+        ];
+    }
+
     public static function read_vehicles($fileName)
     {
         $csv = array_map('str_getcsv', file($fileName));

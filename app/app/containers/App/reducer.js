@@ -21,7 +21,10 @@ import {
   LOAD_ICE_VEHICLES_ERROR,
   LOAD_TNG,
   LOAD_TNG_SUCCESS,
-  LOAD_TNG_ERROR
+  LOAD_TNG_ERROR,
+  LOAD_COST_COMPARISON_DEFAULTS,
+  LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
+  LOAD_COST_COMPARISON_DEFAULTS_ERROR
 } from './constants';
 
 // The initial state of the App
@@ -77,6 +80,21 @@ function appReducer(state = initialState, action) {
         .set('loading', false);
 
     case LOAD_TNG_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+
+    case LOAD_COST_COMPARISON_DEFAULTS:
+      return state
+        .set('loading', true)
+        .set('error', false);
+
+    case LOAD_COST_COMPARISON_DEFAULTS_SUCCESS:
+      return state
+        .setIn(['data', 'costComparisonDefaults'], action.costComparisonDefaults)
+        .set('loading', false);
+
+    case LOAD_COST_COMPARISON_DEFAULTS_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);

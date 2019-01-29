@@ -24,7 +24,10 @@ import {
   LOAD_ICE_VEHICLES_ERROR,
   LOAD_TNG,
   LOAD_TNG_SUCCESS,
-  LOAD_TNG_ERROR
+  LOAD_TNG_ERROR,
+  LOAD_COST_COMPARISON_DEFAULTS,
+  LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
+  LOAD_COST_COMPARISON_DEFAULTS_ERROR
 } from './constants';
 
 export function loadElectricVehicles() {
@@ -83,6 +86,26 @@ export function tngLoaded(tng) {
 export function tngLoadError(error) {
   return {
     type: LOAD_TNG_ERROR,
+    error
+  }
+}
+
+export function loadCostComparisonDefaults() {
+  return {
+    type: LOAD_COST_COMPARISON_DEFAULTS
+  }
+}
+
+export function costComparisonDefaultsLoaded(costComparisonDefaults) {
+  return {
+    type: LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
+    costComparisonDefaults
+  }
+}
+
+export function costComparisonDefaultsLoadError(error) {
+  return {
+    type: LOAD_COST_COMPARISON_DEFAULTS_ERROR,
     error
   }
 }

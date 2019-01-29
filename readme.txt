@@ -19,6 +19,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.0.5 =
+* Added options for cost comparison default values.
+
 = 1.0.4 =
 * Separated EV values into efficiency and GHG.
 * Added annual cost comparison.

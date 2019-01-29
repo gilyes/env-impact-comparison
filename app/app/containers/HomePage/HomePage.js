@@ -152,7 +152,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
                 {(this.props.selectedElectricVehicle || this.props.selectedIceVehicle) &&
                   <div className="cost-comparison-container">
-                    <CostComparisonForm />
+                    <CostComparisonForm initialValues={this.props.costComparisonDefaults}/>
                   </div>
                 }
 

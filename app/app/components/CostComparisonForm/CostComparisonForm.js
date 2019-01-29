@@ -22,5 +22,6 @@ const CostComparisonForm = ({ handleSubmit }) => {
 };
 
 export default reduxForm({
-  form: 'costComparisonForm'
+  form: 'costComparisonForm',
+  enableReinitialize: true
 })(CostComparisonForm);

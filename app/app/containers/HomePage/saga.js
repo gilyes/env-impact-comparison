@@ -1,9 +1,11 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { electricVehiclesLoaded, electricVehiclesLoadError, iceVehiclesLoaded, iceVehiclesLoadError, tngLoaded, tngLoadError } from 'containers/App/actions';
+import {
+  electricVehiclesLoaded, electricVehiclesLoadError, iceVehiclesLoaded, iceVehiclesLoadError, tngLoaded, tngLoadError,
+  costComparisonDefaultsLoaded, costComparisonDefaultsLoadError
+} from 'containers/App/actions';
 
 import request from 'utils/request';
-import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG } from '../App/constants';
-import { createElectricVehicleEfficiencySelector } from './selectors';
+import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG, LOAD_COST_COMPARISON_DEFAULTS } from '../App/constants';
 
 export function* getElectricVehicles() {
   try {
@@ -35,6 +37,16 @@ export function* getTNG() {
   }
 }
 
+export function* getCostComparisonDefaults() {
+  try {
+    const defaults = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/costCompDefaults"));
+
+    yield put(costComparisonDefaultsLoaded(defaults));
+  } catch (err) {
+    yield put(costComparisonDefaultsLoadError(err));
+  }
+}
+
 function getApiUrl(relativePath) {
   var rootUrl = process.env.API_ROOT_URL;
   if (rootUrl) {
@@ -62,5 +74,9 @@ export function* iceVehiclesSaga() {
 
 export function* tngSaga() {
   yield takeLatest(LOAD_TNG, getTNG);
+}
+
+export function* constComparisonDefaultsSaga() {
+  yield takeLatest(LOAD_COST_COMPARISON_DEFAULTS, getCostComparisonDefaults);
 }
 

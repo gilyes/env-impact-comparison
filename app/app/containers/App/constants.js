@@ -18,4 +18,7 @@ export const LOAD_ICE_VEHICLES_ERROR = 'env-impact-comparison/App/LOAD_ICE_VEHIC
 export const LOAD_TNG = 'env-impact-comparison/App/LOAD_TNG';
 export const LOAD_TNG_SUCCESS = 'env-impact-comparison/App/LOAD_TNG_SUCCESS';
 export const LOAD_TNG_ERROR = 'env-impact-comparison/App/LOAD_TNG_ERROR';
+export const LOAD_COST_COMPARISON_DEFAULTS = 'env-impact-comparison/App/LOAD_COST_COMPARISON_DEFAULTS';
+export const LOAD_COST_COMPARISON_DEFAULTS_SUCCESS = 'env-impact-comparison/App/LOAD_COST_COMPARISON_DEFAULTS_SUCCESS';
+export const LOAD_COST_COMPARISON_DEFAULTS_ERROR = 'env-impact-comparison/App/LOAD_COST_COMPARISON_DEFAULTS_ERROR';
 export const DEFAULT_LOCALE = 'en';

@@ -33,6 +33,11 @@ const createTNGSelector = () => createSelector(
   (globalState) => globalState.getIn(['data', 'tng'])
 );
 
+const createCostComparisonDefaultsSelector = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.getIn(['data', 'costComparisonDefaults'])
+);
+
 const createTNGForDisplaySelector = () => createSelector(
   createTNGSelector(),
   (tng) => {
@@ -53,5 +58,6 @@ export {
   createElectricVehicleSelector,
   createIceVehicleSelector,
   createTNGSelector,
-  createTNGForDisplaySelector
+  createTNGForDisplaySelector,
+  createCostComparisonDefaultsSelector
 };

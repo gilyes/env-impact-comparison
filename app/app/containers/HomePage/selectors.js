@@ -103,7 +103,7 @@ const createElectricVehicleAnnualCostSelector = () => createSelector(
   selectElectricityRate,
   createSelectedElectricVehicleSelector(),
   (annualDistanceDriven, electricityRate, vehicle) => {
-    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(electricityRate)) {
+    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(electricityRate) || annualDistanceDriven <= 0 || electricityRate <= 0) {
       return "N/A";
     }
 
@@ -116,7 +116,7 @@ const createIceVehicleAnnualCostSelector = () => createSelector(
   selectFuelCost,
   createSelectedIceVehicleSelector(),
   (annualDistanceDriven, fuelCost, vehicle) => {
-    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(fuelCost)) {
+    if (!vehicle || isNaN(annualDistanceDriven) || isNaN(fuelCost) || annualDistanceDriven <= 0 || fuelCost <= 0) {
       return "N/A";
     }
 
