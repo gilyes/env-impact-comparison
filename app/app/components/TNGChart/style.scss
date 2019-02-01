@@ -1,0 +1,4 @@
+svg[aria-label="A chart."]>g>g:last-child {
+    // HACK: working around a bug in Google Pie Chart that causes flickering tooltip. from https://stackoverflow.com/a/39775254/573447
+    pointer-events: none
+}

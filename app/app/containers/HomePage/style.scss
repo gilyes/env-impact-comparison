@@ -33,75 +33,13 @@
         color: black;
         margin-left: 0.4em;
     }
-    #tng-chart-container {
+    .tng-chart-container {
         margin: 3px;
-    }
-    .vehicle-container {
-        display: table-row;
     }
     .vehicle-selectors {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-    }
-    .vehicle-selector {
-        margin-top: auto;
-        margin-bottom: auto;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        width: 50%;
-    }
-    .vehicle-results-container {
-        display: table;
-    }
-    .vehicle-details {
-        display: table-row;
-        padding-left: 10px;
-        padding-right: 10px;
-        width: 50%;
-        text-align: center;
-    }
-    .vehicle-details>div {
-        background: #212121;
-        padding-left: 5px;
-        padding-bottom: 5px;
-        border-radius: 7px;
-    }
-    .vehicle-image-container {
-        height: 60px;
-        width: 120px;
-        position: relative;
-        overflow: hidden;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .vehicle-image {
-        width: 120px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-    .vehicle-emission {
-        margin-top: 5px;
-        vertical-align: middle;
-    }
-    .vehicle-fuel {
-        margin-top: 5px;
-        vertical-align: middle;
-    }
-    .vehicle-headers {
-        display: table-row;
-        width: 100%
-    }
-    .vehicle-header {
-        display: table-cell;
-        padding-left: 10px;
-        padding-right: 10px;
     }
     .cost-comparison-container {
         display: table-row;
@@ -115,36 +53,16 @@
             margin-right: 10px;
         }
     }
-    .cost-comparison-header {
-        display: table-row;
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 1.4em;
-        width: 100%;
-    }
-    .cost-comparison-inputs {
-        line-height: 1.9
-    }
     .cost-comparison-result-container {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
     }
-    .vehicle-annual-cost {
-        background: #212121;
-        padding: 10px;
-        border-radius: 5px;
-    }
-    #annual-cost-chart-container {
+    .annual-cost-chart-container {
         width: 400px;
         margin-top: 5px;
         margin-left: auto;
         margin-right: auto;
-    }
-    svg[aria-label="A chart."]>g>g:last-child {
-        // HACK: working around a bug in Google Chart that causes flickering tooltip. from https://stackoverflow.com/a/39775254/573447
-        pointer-events: none
     }
 }

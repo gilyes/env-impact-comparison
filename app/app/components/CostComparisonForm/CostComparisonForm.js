@@ -1,5 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
+import './style.scss';
 
 const CostComparisonForm = ({ handleSubmit }) => {
   return (
