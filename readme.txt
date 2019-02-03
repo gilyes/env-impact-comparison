@@ -16,8 +16,12 @@ Displays and compares the environmental impact of various electric and gas vehic
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Upload EV/ICE CSV files on the plugin settings page.
   * CSV format: vehicle_name, consumption (number), picture_url
+4. Use shortcode [env-impact-comparison].
  
 == Changelog ==
+
+= 1.1 =
+* Added ability to specify default vehicles.
 
 = 1.0.5 =
 * Added options for cost comparison default values.

@@ -22,9 +22,9 @@ import {
   LOAD_TNG,
   LOAD_TNG_SUCCESS,
   LOAD_TNG_ERROR,
-  LOAD_COST_COMPARISON_DEFAULTS,
-  LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
-  LOAD_COST_COMPARISON_DEFAULTS_ERROR
+  LOAD_CONFIG,
+  LOAD_CONFIG_SUCCESS,
+  LOAD_CONFIG_ERROR
 } from './constants';
 
 // The initial state of the App
@@ -84,17 +84,17 @@ function appReducer(state = initialState, action) {
         .set('error', action.error)
         .set('loading', false);
 
-    case LOAD_COST_COMPARISON_DEFAULTS:
+    case LOAD_CONFIG:
       return state
         .set('loading', true)
         .set('error', false);
 
-    case LOAD_COST_COMPARISON_DEFAULTS_SUCCESS:
+    case LOAD_CONFIG_SUCCESS:
       return state
-        .setIn(['data', 'costComparisonDefaults'], action.costComparisonDefaults)
+        .setIn(['data', 'config'], action.config)
         .set('loading', false);
 
-    case LOAD_COST_COMPARISON_DEFAULTS_ERROR:
+    case LOAD_CONFIG_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);

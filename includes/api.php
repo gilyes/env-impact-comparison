@@ -58,13 +58,18 @@ class EnvImpactComparison_Api
         return $tng;
     }
 
-    public static function get_cost_comparison_defaults()
+    public static function get_config()
     {
         $options = get_option('env_impact_comparison_settings', array());
+        $defaultElectricVehicle = EnvImpactComparison_DataAccess::get_electric_vehicle($options['default_electric_vehicle'] ?? '');
+        $defaultIceVehicle = EnvImpactComparison_DataAccess::get_ice_vehicle($options['default_ice_vehicle'] ?? '');
         return (object) [
-            'annualDistanceDriven' => $options['default_annual_distance_driven'] ?? '',
-            'fuelCost' => $options['default_fuel_cost'] ?? '',
-            'electricityRate' => $options['default_electricity_rate'] ?? '',
+            'defaultElectricVehicle' => $defaultElectricVehicle,
+            'defaultIceVehicle' => $defaultIceVehicle,
+            'costComparisonDefaults' => (object) [
+                'annualDistanceDriven' => $options['default_annual_distance_driven'] ?? '',
+                'fuelCost' => $options['default_fuel_cost'] ?? '',
+                'electricityRate' => $options['default_electricity_rate'] ?? ''],
         ];
     }
 

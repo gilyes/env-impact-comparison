@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_SELECTED_ICE_VEHICLE, CHANGE_SELECTED_ELECTRIC_VEHICLE } from './constants';
+import { CHANGE_SELECTED_ICE_VEHICLE, CHANGE_SELECTED_ELECTRIC_VEHICLE, SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE, SET_DEFAULT_SELECTED_ICE_VEHICLE } from './constants';
 
 export function changeSelectedElectricVehicle(vehicle) {
   return {
@@ -27,6 +27,20 @@ export function changeSelectedElectricVehicle(vehicle) {
 export function changeSelectedIceVehicle(vehicle) {
   return {
     type: CHANGE_SELECTED_ICE_VEHICLE,
+    vehicle
+  };
+}
+
+export function setDefaultSelectedElectricVehicle(vehicle) {
+  return {
+    type: SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE,
+    vehicle
+  };
+}
+
+export function setDefaultSelectedIceVehicle(vehicle) {
+  return {
+    type: SET_DEFAULT_SELECTED_ICE_VEHICLE,
     vehicle
   };
 }

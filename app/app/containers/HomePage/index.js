@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { createLoadingSelector, createErrorSelector, createElectricVehicleSelector, createIceVehicleSelector, createTNGForDisplaySelector } from 'containers/App/selectors';
-import { loadElectricVehicles, loadIceVehicles, loadTNG, loadCostComparisonDefaults } from '../App/actions';
+import { loadElectricVehicles, loadIceVehicles, loadTNG, loadConfig } from '../App/actions';
 import { changeSelectedElectricVehicle, changeSelectedIceVehicle } from './actions';
 import {
   createSelectedElectricVehicleSelector,
@@ -18,19 +18,21 @@ import {
   selectFuelCost,
   selectElectricityRate,
   createElectricVehicleAnnualCostSelector,
-  createIceVehicleAnnualCostSelector
+  createIceVehicleAnnualCostSelector,
+  createDefaultElectricVehicleSelector,
+  createDefaultIceVehicleSelector
 } from './selectors';
 import reducer from './reducer';
-import { electricVehiclesSaga, iceVehiclesSaga, tngSaga, constComparisonDefaultsSaga } from './saga';
+import { electricVehiclesSaga, iceVehiclesSaga, tngSaga, configSaga } from './saga';
 import HomePage from './HomePage';
-import { createCostComparisonDefaultsSelector } from '../App/selectors';
+import { createConfigSelector } from '../App/selectors';
 
 const mapDispatchToProps = (dispatch) => ({
   onInitialLoad: () => {
     dispatch(loadTNG());
     dispatch(loadElectricVehicles());
     dispatch(loadIceVehicles());
-    dispatch(loadCostComparisonDefaults());
+    dispatch(loadConfig());
   },
   onSelectedElectricVehicleChanged: (vehicle) => {
     dispatch(changeSelectedElectricVehicle(vehicle));
@@ -49,6 +51,8 @@ const mapStateToProps = createStructuredSelector({
   iceVehicles: createIceVehicleSelector(),
   selectedElectricVehicle: createSelectedElectricVehicleSelector(),
   selectedIceVehicle: createSelectedIceVehicleSelector(),
+  defaultElectricVehicle: createDefaultElectricVehicleSelector(),
+  defaultIceVehicle: createDefaultIceVehicleSelector(),
   selectedElectricVehicleCarbonEquivalentEmitted: createElectricVehicleCarbonEquivalentEmittedSelector(),
   selectedElectricVehicleEfficiency: createElectricVehicleEfficiencySelector(),
   selectedElectricVehicleGHG: createElectricVehicleGHGSelector(),
@@ -60,7 +64,7 @@ const mapStateToProps = createStructuredSelector({
   electricityRate: selectElectricityRate,
   electricVehicleAnnualCost: createElectricVehicleAnnualCostSelector(),
   iceVehicleAnnualCost: createIceVehicleAnnualCostSelector(),
-  costComparisonDefaults: createCostComparisonDefaultsSelector(),
+  config: createConfigSelector(),
   error: createErrorSelector(),
 });
 
@@ -70,7 +74,7 @@ const withReducer = injectReducer({ key: 'home', reducer });
 const withElectricVehiclesSaga = injectSaga({ key: 'home_ev', saga: electricVehiclesSaga });
 const withIceVehiclesSaga = injectSaga({ key: 'home_ice', saga: iceVehiclesSaga });
 const withTNGSaga = injectSaga({ key: 'home_tng', saga: tngSaga });
-const withCostComparisonDefaultsSaga = injectSaga({ key: 'home_cost_comparison_defaults', saga: constComparisonDefaultsSaga });
+const withConfigSaga = injectSaga({ key: 'home_config', saga: configSaga });
 
-export default compose(withReducer, withElectricVehiclesSaga, withIceVehiclesSaga, withTNGSaga, withCostComparisonDefaultsSaga, withConnect)(HomePage);
+export default compose(withReducer, withElectricVehiclesSaga, withIceVehiclesSaga, withTNGSaga, withConfigSaga, withConnect)(HomePage);
 export { mapDispatchToProps };

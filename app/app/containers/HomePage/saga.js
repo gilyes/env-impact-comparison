@@ -1,11 +1,12 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest, all } from 'redux-saga/effects';
 import {
   electricVehiclesLoaded, electricVehiclesLoadError, iceVehiclesLoaded, iceVehiclesLoadError, tngLoaded, tngLoadError,
-  costComparisonDefaultsLoaded, costComparisonDefaultsLoadError
+  configLoaded, configLoadError
 } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG, LOAD_COST_COMPARISON_DEFAULTS } from '../App/constants';
+import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG, LOAD_CONFIG } from '../App/constants';
+import { setDefaultSelectedElectricVehicle, setDefaultSelectedIceVehicle } from './actions';
 
 export function* getElectricVehicles() {
   try {
@@ -37,13 +38,17 @@ export function* getTNG() {
   }
 }
 
-export function* getCostComparisonDefaults() {
+export function* getConfig() {
   try {
-    const defaults = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/costCompDefaults"));
+    const config = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/config"));
 
-    yield put(costComparisonDefaultsLoaded(defaults));
+    yield all([
+      put(configLoaded(config)),
+      put(setDefaultSelectedElectricVehicle(config.defaultElectricVehicle)),
+      put(setDefaultSelectedIceVehicle(config.defaultIceVehicle))
+    ]);
   } catch (err) {
-    yield put(costComparisonDefaultsLoadError(err));
+    yield put(configLoadError(err));
   }
 }
 
@@ -76,7 +81,7 @@ export function* tngSaga() {
   yield takeLatest(LOAD_TNG, getTNG);
 }
 
-export function* constComparisonDefaultsSaga() {
-  yield takeLatest(LOAD_COST_COMPARISON_DEFAULTS, getCostComparisonDefaults);
+export function* configSaga() {
+  yield takeLatest(LOAD_CONFIG, getConfig);
 }
 

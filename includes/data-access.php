@@ -93,6 +93,12 @@ class EnvImpactComparison_DataAccess
         return self::get_vehicles($table_name);
     }
 
+    public static function get_electric_vehicle($name)
+    {
+        $table_name = self::get_electric_vehicles_table_name();
+        return self::get_vehicle($table_name, $name);
+    }
+
     public static function save_ice_vehicles($ice_vehicles)
     {
         $table_name = self::get_ice_vehicles_table_name();
@@ -103,6 +109,12 @@ class EnvImpactComparison_DataAccess
     {
         $table_name = self::get_ice_vehicles_table_name();
         return self::get_vehicles($table_name);
+    }
+
+    public static function get_ice_vehicle($name)
+    {
+        $table_name = self::get_ice_vehicles_table_name();
+        return self::get_vehicle($table_name, $name);
     }
 
     private static function save_vehicles($vehicles, $table_name)
@@ -140,6 +152,22 @@ class EnvImpactComparison_DataAccess
         );
 
         return $vehicles;
+    }
+
+    private static function get_vehicle($table_name, $name)
+    {
+        global $wpdb;
+
+        $vehicles = $wpdb->get_results(
+            "
+            SELECT name, consumption, pictureUrl
+            FROM $table_name
+            WHERE name = '$name'
+            LIMIT 1
+            "
+        );
+
+        return $vehicles? $vehicles[0] : NULL;
     }
 
     private static function get_tng_table_name()

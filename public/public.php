@@ -52,9 +52,9 @@ class EnvImpactComparison_Public
             'callback' => array('EnvImpactComparison_Api', 'get_tng'),
         ));
 
-        register_rest_route('env-impact-comparison/v1', '/costCompDefaults', array(
+        register_rest_route('env-impact-comparison/v1', '/config', array(
             'methods' => 'GET',
-            'callback' => array('EnvImpactComparison_Api', 'get_cost_comparison_defaults'),
+            'callback' => array('EnvImpactComparison_Api', 'get_config'),
         ));
     }
 

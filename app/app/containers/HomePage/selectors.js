@@ -3,7 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
-import { createTNGSelector, selectGlobal } from '../App/selectors';
+import { createTNGSelector, createConfigSelector, createElectricVehicleSelector, createIceVehicleSelector } from '../App/selectors';
 import { formValueSelector } from 'redux-form/immutable';
 import { toJS } from 'immutable';
 
@@ -25,6 +25,28 @@ const createSelectedIceVehicleSelector = () => createSelector(
   }
 );
 
+const createDefaultElectricVehicleSelector = () => createSelector(
+  createElectricVehicleSelector(),
+  createConfigSelector(),
+  (vehicles, config) => {
+    if (!vehicles || !config) {
+      return null;
+    }
+    return vehicles.find(x => x.name === config.defaultElectricVehicle);
+  }
+);
+
+const createDefaultIceVehicleSelector = () => createSelector(
+  createIceVehicleSelector(),
+  createConfigSelector(),
+  (vehicles, config) => {
+    if (!vehicles || !config) {
+      return null;
+    }
+    return vehicles.find(x => x.name === config.defaultIceVehicle);
+  }
+);
+
 const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelector(
   createTNGSelector(),
   createSelectedElectricVehicleSelector(),
@@ -35,7 +57,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
 
     let coalPercentage = tng.coal / tng.total;
     let gasPercentage = tng.gas / tng.total;
-    let hydroPercentage = tng.hydro / tng.total;
+    let hydroPercentage =tng.hydro / tng.total;
     let windPercentage = tng.wind / tng.total;
     let otherPercentage = tng.other / tng.total;
 
@@ -141,5 +163,7 @@ export {
   selectFuelCost,
   selectElectricityRate,
   createElectricVehicleAnnualCostSelector,
-  createIceVehicleAnnualCostSelector
+  createIceVehicleAnnualCostSelector,
+  createDefaultElectricVehicleSelector,
+  createDefaultIceVehicleSelector
 };

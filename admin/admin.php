@@ -41,10 +41,17 @@ class EnvImpactComparison_Admin
         add_settings_field("ice-vehicles-csv", "Upload ICE Vehicles (CSV)", array($this, "ice_vehicles_upload"),
             "env_impact_comparison", "env_impact_comparison_settings");
 
+        add_settings_field("default-electric-vehicle", "Default Electric Vehicle Name", array($this, "textbox_callback"),
+            "env_impact_comparison", "env_impact_comparison_settings", array('default_electric_vehicle'));
+        add_settings_field("default-ice-vehicle", "Default ICE Vehicle Name", array($this, "textbox_callback"),
+            "env_impact_comparison", "env_impact_comparison_settings", array('default_ice_vehicle'));
+
         add_settings_field("default-annual-distance-driven", "Default Annual Distance Driven (km)", array($this, "textbox_callback"),
             "env_impact_comparison", "env_impact_comparison_settings", array('default_annual_distance_driven'));
         add_settings_field("default-fuel-cost", "Default Fuel Cost ($/L)", array($this, "textbox_callback"),
             "env_impact_comparison", "env_impact_comparison_settings", array('default_fuel_cost'));
+        add_settings_field("default-electricity-rate", "Default Electricity Rate (c/kWh)", array($this, "textbox_callback"),
+            "env_impact_comparison", "env_impact_comparison_settings", array('default_electricity_rate'));
         add_settings_field("default-electricity-rate", "Default Electricity Rate (c/kWh)", array($this, "textbox_callback"),
             "env_impact_comparison", "env_impact_comparison_settings", array('default_electricity_rate'));
     }

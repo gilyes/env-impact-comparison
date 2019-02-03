@@ -25,9 +25,9 @@ import {
   LOAD_TNG,
   LOAD_TNG_SUCCESS,
   LOAD_TNG_ERROR,
-  LOAD_COST_COMPARISON_DEFAULTS,
-  LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
-  LOAD_COST_COMPARISON_DEFAULTS_ERROR
+  LOAD_CONFIG,
+  LOAD_CONFIG_SUCCESS,
+  LOAD_CONFIG_ERROR
 } from './constants';
 
 export function loadElectricVehicles() {
@@ -90,22 +90,22 @@ export function tngLoadError(error) {
   }
 }
 
-export function loadCostComparisonDefaults() {
+export function loadConfig() {
   return {
-    type: LOAD_COST_COMPARISON_DEFAULTS
+    type: LOAD_CONFIG
   }
 }
 
-export function costComparisonDefaultsLoaded(costComparisonDefaults) {
+export function configLoaded(config) {
   return {
-    type: LOAD_COST_COMPARISON_DEFAULTS_SUCCESS,
-    costComparisonDefaults
+    type: LOAD_CONFIG_SUCCESS,
+    config
   }
 }
 
-export function costComparisonDefaultsLoadError(error) {
+export function configLoadError(error) {
   return {
-    type: LOAD_COST_COMPARISON_DEFAULTS_ERROR,
+    type: LOAD_CONFIG_ERROR,
     error
   }
 }
