@@ -46,6 +46,9 @@ class EnvImpactComparison_Admin
         add_settings_field("default-ice-vehicle", "Default ICE Vehicle Name", array($this, "textbox_callback"),
             "env_impact_comparison", "env_impact_comparison_settings", array('default_ice_vehicle'));
 
+        add_settings_field("explanation-text", "Explanation Text (below vehicle details)", array($this, "textarea_callback"),
+            "env_impact_comparison", "env_impact_comparison_settings", array('explanation_text'));
+
         add_settings_field("default-annual-distance-driven", "Default Annual Distance Driven (km)", array($this, "textbox_callback"),
             "env_impact_comparison", "env_impact_comparison_settings", array('default_annual_distance_driven'));
         add_settings_field("default-fuel-cost", "Default Fuel Cost ($/L)", array($this, "textbox_callback"),
@@ -155,6 +158,15 @@ class EnvImpactComparison_Admin
         $id = $args[0];
         $value = isset($option[$id]) ? $option[$id] : "";
         echo "<input type='text' id='$id' name='env_impact_comparison_settings[$id]' value='$value' />";
+    }
+
+    public function textarea_callback($args)
+    {
+        $option = get_option('env_impact_comparison_settings');
+        $id = $args[0];
+        $value = isset($option[$id]) ? $option[$id] : "";
+        echo "<textarea id='$id' rows='4' cols='120' name='env_impact_comparison_settings[$id]'>$value</textarea>";
+        echo "<br><i><a href='https://www.markdownguide.org/cheat-sheet/' target='_blank'>Markdown</a> allowed.</i>";
     }
 
     public function validate_settings($option)

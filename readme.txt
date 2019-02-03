@@ -22,6 +22,7 @@ Displays and compares the environmental impact of various electric and gas vehic
 
 = 1.1 =
 * Added ability to specify default vehicles.
+* Added explanation text option to be shown below vehicle details.
 
 = 1.0.5 =
 * Added options for cost comparison default values.

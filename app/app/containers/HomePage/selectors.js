@@ -47,6 +47,18 @@ const createDefaultIceVehicleSelector = () => createSelector(
   }
 );
 
+const createExplanationTextSelector = () => createSelector(
+  createConfigSelector(),
+  (config) => {
+    if (!config || !config.explanationText) {
+      return null;
+    }
+    // insert spaces before line breaks so that they are properly converted by react-markdown
+    config.explanationText = config.explanationText.replace(/\r\n/g, "\n").replace(/\n/g, "  \n");
+    return config.explanationText;
+  }
+);
+
 const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelector(
   createTNGSelector(),
   createSelectedElectricVehicleSelector(),
@@ -57,7 +69,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
 
     let coalPercentage = tng.coal / tng.total;
     let gasPercentage = tng.gas / tng.total;
-    let hydroPercentage =tng.hydro / tng.total;
+    let hydroPercentage = tng.hydro / tng.total;
     let windPercentage = tng.wind / tng.total;
     let otherPercentage = tng.other / tng.total;
 
@@ -165,5 +177,6 @@ export {
   createElectricVehicleAnnualCostSelector,
   createIceVehicleAnnualCostSelector,
   createDefaultElectricVehicleSelector,
-  createDefaultIceVehicleSelector
+  createDefaultIceVehicleSelector,
+  createExplanationTextSelector
 };

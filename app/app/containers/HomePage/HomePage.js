@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import './style.scss';
+import ReactMarkdown from 'react-markdown';
 import CostComparisonForm from '../../components/CostComparisonForm';
 import TNGChart from '../../components/TNGChart';
 import VehicleSelector from '../../components/VehicleSelector';
 import AnnualCostChart from '../../components/AnnualCostChart';
 import VehicleDetails from '../../components/VehicleDetails';
 import VehicleCost from '../../components/VehicleCost';
+import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -74,6 +75,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                     carbonEquivalentEmitted={this.props.selectedIceVehicleCarbonEquivalentEmitted}
                     efficiency={this.props.selectedIceVehicleEfficiency} />
                 }
+                <div className="explanation-box-container">
+                  {this.props.explanationText &&
+                    <div className="explanation-box">
+                      <ReactMarkdown source={this.props.explanationText} />
+                    </div>
+                  }
+                </div>
 
                 {(this.props.selectedElectricVehicle || this.props.selectedIceVehicle) &&
                   <div className="cost-comparison-container">

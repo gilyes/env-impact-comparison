@@ -66,6 +66,7 @@ class EnvImpactComparison_Api
         return (object) [
             'defaultElectricVehicle' => $defaultElectricVehicle,
             'defaultIceVehicle' => $defaultIceVehicle,
+            'explanationText' => $options['explanation_text'] ?? '',
             'costComparisonDefaults' => (object) [
                 'annualDistanceDriven' => $options['default_annual_distance_driven'] ?? '',
                 'fuelCost' => $options['default_fuel_cost'] ?? '',
