@@ -29,7 +29,6 @@ AnnualCostChart.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ])
-
 };
 
 export default AnnualCostChart;

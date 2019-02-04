@@ -15,7 +15,7 @@ const VehicleDetails = (props) => {
         <div className="vehicle-fuel">
           <strong>{props.efficiency}</strong> L/100km efficiency
         </div>
-        <div className="vehicle-fuel">
+        <div className="vehicle-ghg">
           {props.ghg &&
             <div>
               <strong>{props.ghg}</strong> L/100km GHG
