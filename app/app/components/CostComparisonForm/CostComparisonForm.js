@@ -12,11 +12,11 @@ const CostComparisonForm = ({ handleSubmit }) => {
         <label htmlFor='annual-distance-driven'>Annual distance driven (km):</label>
         <Field name='annualDistanceDriven' id='annual-distance-driven' component='input' type='text' />
 
-        <label htmlFor='fuel-cost'>Fuel cost ($/L):</label>
-        <Field name='fuelCost' id='fuel-cost' component='input' type='text' />
-
         <label htmlFor='electricity-rate'>Electricity rate (¢/kWh)</label>
         <Field name='electricityRate' id='electricity-rate' component='input' type='text' />
+
+        <label htmlFor='fuel-cost'>Fuel cost ($/L):</label>
+        <Field name='fuelCost' id='fuel-cost' component='input' type='text' />
       </div>
     </form>
   );

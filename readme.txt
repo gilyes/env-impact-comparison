@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.1.1 =
+* Changed order of electricity rate and fuel cost fields.
+
 = 1.1 =
 * Added ability to specify default vehicles.
 * Added explanation text option to be shown below vehicle details.
