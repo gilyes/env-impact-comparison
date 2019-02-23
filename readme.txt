@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.2 =
+* Updated chart legend.
+
 = 1.1.1 =
 * Changed order of electricity rate and fuel cost fields.
 

@@ -44,9 +44,8 @@ const createTNGForDisplaySelector = () => createSelector(
     if (!tng) {
       return {};
     }
-    // for display remove the total
-    const tngForDisplay = JSON.parse(JSON.stringify(tng));
-    delete tngForDisplay.total;
+
+    const tngForDisplay = { "Coal": tng.coal, "Gas": tng.gas, "Hydro": tng.hydro, "Wind": tng.wind, "Solar/Other": tng.other };
     return tngForDisplay;
   }
 );
