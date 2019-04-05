@@ -36,6 +36,13 @@
     .tng-chart-container {
         margin: 3px;
     }
+    .tng-update-time {
+        text-align: right;
+        margin-right: 10px;
+        margin-left: 10px;
+        font-size: 80%;
+        color: gray;
+    }
     .vehicle-selectors {
         display: flex;
         flex-direction: row;

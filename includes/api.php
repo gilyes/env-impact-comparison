@@ -18,7 +18,7 @@ class EnvImpactComparison_Api
     {
         $cachedTNG = EnvImpactComparison_DataAccess::get_tng();
         $tng = new stdClass;
-        if (isset($cachedTNG)) {
+        if (isset($cachedTNG) && isset($cachedTNG->time)) {
             $tng = json_decode($cachedTNG->tng);
 
             $minTime = new DateTime();
@@ -53,6 +53,7 @@ class EnvImpactComparison_Api
             }
         }
 
+        $tng->time = (new DateTime('now', new DateTimeZone('America/Edmonton')))->format("Y-m-d h:i A");
         EnvImpactComparison_DataAccess::save_tng($tng);
 
         return $tng;

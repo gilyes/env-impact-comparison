@@ -45,7 +45,10 @@ const createTNGForDisplaySelector = () => createSelector(
       return {};
     }
 
-    const tngForDisplay = { "Coal": tng.coal, "Gas": tng.gas, "Hydro": tng.hydro, "Wind": tng.wind, "Solar/Other": tng.other };
+    const tngForDisplay = {
+      tng: { "Coal": tng.coal, "Gas": tng.gas, "Hydro": tng.hydro, "Wind": tng.wind, "Solar/Other": tng.other },
+      time: tng.time
+    };
     return tngForDisplay;
   }
 );
