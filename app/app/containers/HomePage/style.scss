@@ -16,17 +16,23 @@
         margin-bottom: 1em;
         input {
             outline: none;
-            border-bottom: 1px dotted #999;
             border-top: none;
             border-left: none;
             border-right: none;
-            background: #101010;
+            background: #383737;
             color: #c0c0c0;
-            padding: 2px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 4px;
+            padding-right: 4px;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         input[type="text"]:focus {
             outline: none;
+        }
+        input[type="text"]::selection {
+            background: #66a8f3;
+            color: #e2e2e2;
         }
     }
     span.at-prefix {
