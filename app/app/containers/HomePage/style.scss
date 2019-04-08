@@ -1,19 +1,25 @@
 .home-page {
     font-size: small;
+
     h2 {
         font-size: 1.5em;
     }
+
     section {
         margin: 3em auto;
+
         &:first-child {
             margin-top: 0;
         }
+
         &.centered {
             text-align: center;
         }
     }
+
     form {
         margin-bottom: 1em;
+
         input {
             outline: none;
             border-top: none;
@@ -26,22 +32,29 @@
             padding-left: 4px;
             padding-right: 4px;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            border-color: #2d3940;
         }
+
         input[type="text"]:focus {
             outline: none;
+            color: silver;
         }
+
         input[type="text"]::selection {
             background: #66a8f3;
             color: #e2e2e2;
         }
     }
+
     span.at-prefix {
         color: black;
         margin-left: 0.4em;
     }
+
     .tng-chart-container {
         margin: 3px;
     }
+
     .tng-update-time {
         text-align: right;
         margin-right: 10px;
@@ -49,35 +62,41 @@
         font-size: 80%;
         color: gray;
     }
+
     .vehicle-selectors {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
+
     .cost-comparison-container {
         display: table-row;
         margin-top: 20px;
         margin-left: 10px;
         margin-right: 10px;
         width: 100%;
+
         input[type=text] {
             width: 50px;
             margin-left: 5px;
             margin-right: 10px;
         }
     }
+
     .cost-comparison-result-container {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
     }
+
     .annual-cost-chart-container {
         width: 400px;
         margin-top: 5px;
         margin-left: auto;
         margin-right: auto;
     }
+
     .explanation-box {
         padding: 3px 3px 3px 13px;
         color: #a0a0a0;

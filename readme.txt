@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.3.1 =
+* Tweaked text input style.
+
 = 1.3 =
 * Added TNG chart update time.
 * Tweaked text input style.
