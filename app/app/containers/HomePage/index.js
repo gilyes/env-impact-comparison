@@ -3,9 +3,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import { createLoadingSelector, createErrorSelector, createElectricVehicleSelector, createIceVehicleSelector, createTNGForDisplaySelector } from 'containers/App/selectors';
+import {
+  createLoadingSelector, createErrorSelector, createElectricVehicleSelector, createIceVehicleSelector,
+  createTNGForDisplaySelector, createConfigSelector, createProvincesSelector
+} from 'containers/App/selectors';
 import { loadElectricVehicles, loadIceVehicles, loadTNG, loadConfig } from '../App/actions';
-import { changeSelectedElectricVehicle, changeSelectedIceVehicle } from './actions';
+import { changeSelectedElectricVehicle, changeSelectedIceVehicle, changeSelectedProvince } from './actions';
 import {
   createSelectedElectricVehicleSelector,
   createSelectedIceVehicleSelector,
@@ -21,12 +24,13 @@ import {
   createIceVehicleAnnualCostSelector,
   createDefaultElectricVehicleSelector,
   createDefaultIceVehicleSelector,
-  createExplanationTextSelector
+  createExplanationTextSelector,
+  createSelectedProvinceSelector,
+  createDefaultSelectedProvinceSelector,
 } from './selectors';
 import reducer from './reducer';
 import { electricVehiclesSaga, iceVehiclesSaga, tngSaga, configSaga } from './saga';
 import HomePage from './HomePage';
-import { createConfigSelector } from '../App/selectors';
 
 const mapDispatchToProps = (dispatch) => ({
   onInitialLoad: () => {
@@ -42,6 +46,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeSelectedIceVehicle(vehicle));
   },
   onReloadTNGRequested: () => {
+    dispatch(loadTNG());
+  },
+  onSelectedProvinceChanged: (province) => {
+    dispatch(changeSelectedProvince(province))
     dispatch(loadTNG());
   }
 });
@@ -66,6 +74,9 @@ const mapStateToProps = createStructuredSelector({
   electricVehicleAnnualCost: createElectricVehicleAnnualCostSelector(),
   iceVehicleAnnualCost: createIceVehicleAnnualCostSelector(),
   explanationText: createExplanationTextSelector(),
+  provinces: createProvincesSelector(),
+  selectedProvince: createSelectedProvinceSelector(),
+  defaultSelectedProvince: createDefaultSelectedProvinceSelector(),
   config: createConfigSelector(),
   error: createErrorSelector(),
 });

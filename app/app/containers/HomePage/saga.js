@@ -6,7 +6,8 @@ import {
 
 import request from 'utils/request';
 import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG, LOAD_CONFIG } from '../App/constants';
-import { setDefaultSelectedElectricVehicle, setDefaultSelectedIceVehicle } from './actions';
+import { setDefaultSelectedElectricVehicle, setDefaultSelectedIceVehicle, setDefaultSelectedProvince } from './actions';
+import { createSelectedProvinceSelector } from './selectors';
 
 export function* getElectricVehicles() {
   try {
@@ -30,7 +31,9 @@ export function* getIceVehicles() {
 
 export function* getTNG() {
   try {
-    const tng = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/tng"));
+    const province = yield select(createSelectedProvinceSelector());
+    const provinceId = province ? province.id : "";
+    const tng = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/tng/" + provinceId));
 
     yield put(tngLoaded(tng));
   } catch (err) {
@@ -45,7 +48,8 @@ export function* getConfig() {
     yield all([
       put(configLoaded(config)),
       put(setDefaultSelectedElectricVehicle(config.defaultElectricVehicle)),
-      put(setDefaultSelectedIceVehicle(config.defaultIceVehicle))
+      put(setDefaultSelectedIceVehicle(config.defaultIceVehicle)),
+      put(setDefaultSelectedProvince(config.defaultProvince))
     ]);
   } catch (err) {
     yield put(configLoadError(err));

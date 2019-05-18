@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import CostComparisonForm from '../../components/CostComparisonForm';
 import TNGChart from '../../components/TNGChart';
 import VehicleSelector from '../../components/VehicleSelector';
+import ProvinceSelector from '../../components/ProvinceSelector';
 import AnnualCostChart from '../../components/AnnualCostChart';
 import VehicleDetails from '../../components/VehicleDetails';
 import VehicleCost from '../../components/VehicleCost';
@@ -45,6 +46,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <div className="home-page">
           <section>
             <div>
+              <ProvinceSelector
+                provinces={this.props.provinces}
+                selectedProvince={this.props.selectedProvince}
+                onSelectedProvinceChanged={this.props.onSelectedProvinceChanged}
+                placeholder="Select province..."
+              />
               <div className="tng-chart-container">
                 <TNGChart tng={this.props.tng} />
               </div>
@@ -121,6 +128,7 @@ HomePage.propTypes = {
     PropTypes.object,
     PropTypes.bool,
   ]),
+  config: PropTypes.object,
   onInitialLoad: PropTypes.func,
   onReloadTNGRequested: PropTypes.func,
   electricVehicles: PropTypes.array,
@@ -139,5 +147,8 @@ HomePage.propTypes = {
   iceVehicleAnnualCost: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ])
+  ]),
+  provinces: PropTypes.array,
+  selectedProvince: PropTypes.object,
+  onSelectedProvinceChanged: PropTypes.func
 };

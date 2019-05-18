@@ -52,6 +52,11 @@ class EnvImpactComparison_Public
             'callback' => array('EnvImpactComparison_Api', 'get_tng'),
         ));
 
+        register_rest_route('env-impact-comparison/v1', '/tng/(?P<id>[aA-zZ]*)', array(
+            'methods' => 'GET',
+            'callback' => array('EnvImpactComparison_Api', 'get_tng'),
+        ));
+
         register_rest_route('env-impact-comparison/v1', '/config', array(
             'methods' => 'GET',
             'callback' => array('EnvImpactComparison_Api', 'get_config'),
