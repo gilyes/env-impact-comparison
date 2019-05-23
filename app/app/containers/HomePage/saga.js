@@ -1,13 +1,14 @@
 import { call, put, select, takeLatest, all } from 'redux-saga/effects';
 import {
   electricVehiclesLoaded, electricVehiclesLoadError, iceVehiclesLoaded, iceVehiclesLoadError, tngLoaded, tngLoadError,
-  configLoaded, configLoadError
+  configLoaded, configLoadError, loadTNG
 } from 'containers/App/actions';
 
 import request from 'utils/request';
 import { LOAD_ELECTRIC_VEHICLES, LOAD_ICE_VEHICLES, LOAD_TNG, LOAD_CONFIG } from '../App/constants';
 import { setDefaultSelectedElectricVehicle, setDefaultSelectedIceVehicle, setDefaultSelectedProvince } from './actions';
 import { createSelectedProvinceSelector } from './selectors';
+import { selectRoute } from '../App/selectors';
 
 export function* getElectricVehicles() {
   try {
@@ -45,14 +46,36 @@ export function* getConfig() {
   try {
     const config = yield call(request, getApiUrl("wp-json/env-impact-comparison/v1/config"));
 
+    let urlProvince;
+    const urlProvinceId = yield getUrlProvinceId();
+    if (urlProvinceId) {
+      urlProvince = config.provinces.find((p) => {
+        return p.id.toUpperCase() == urlProvinceId.toUpperCase();
+      })
+    }
+
     yield all([
       put(configLoaded(config)),
       put(setDefaultSelectedElectricVehicle(config.defaultElectricVehicle)),
       put(setDefaultSelectedIceVehicle(config.defaultIceVehicle)),
-      put(setDefaultSelectedProvince(config.defaultProvince))
+      put(setDefaultSelectedProvince(urlProvince ? urlProvince : config.defaultProvince))
     ]);
+
+    // TNG loaded here because it is dependent on province that may come from config above
+    yield put(loadTNG());
   } catch (err) {
     yield put(configLoadError(err));
+  }
+}
+
+function* getUrlProvinceId() {
+  const route = yield select(selectRoute);
+  if (route) {
+    const location = route.get("location");
+    if (location) {
+      const params = new URLSearchParams(location.get("search"));
+      return params.get('prov');
+    }
   }
 }
 

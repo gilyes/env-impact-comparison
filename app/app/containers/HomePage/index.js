@@ -34,9 +34,9 @@ import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({
   onInitialLoad: () => {
-    dispatch(loadTNG());
     dispatch(loadElectricVehicles());
     dispatch(loadIceVehicles());
+    // NOTE: loadConfig also triggers a loadTNG
     dispatch(loadConfig());
   },
   onSelectedElectricVehicleChanged: (vehicle) => {

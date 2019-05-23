@@ -74,6 +74,7 @@ const createTNGForDisplaySelector = () => createSelector(
 
 export {
   selectGlobal,
+  selectRoute,
   createLoadingSelector,
   createErrorSelector,
   createElectricVehicleSelector,
