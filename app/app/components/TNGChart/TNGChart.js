@@ -10,6 +10,7 @@ const TNGChart = (props) => {
         backgroundColor: "transparent",
         fontSize: "14",
         pieHole: 0.45,
+        sliceVisibilityThreshold: 0.0001,
         legend: { textStyle: { color: '#eeeeee', fontSize: "15" } },
         chartArea: { top: 9, bottom: 9, left: 5, right: 5 },
         tooltip: { text: 'percentage', showColorCode: true }
