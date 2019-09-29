@@ -38,6 +38,11 @@ const createConfigSelector = () => createSelector(
   (globalState) => globalState.getIn(['data', 'config'])
 );
 
+const createProvincesSelector = () => createSelector(
+  createConfigSelector(),
+  (config) => config ? config.provinces : []
+);
+
 const createTNGForDisplaySelector = () => createSelector(
   createTNGSelector(),
   (tng) => {
@@ -46,20 +51,42 @@ const createTNGForDisplaySelector = () => createSelector(
     }
 
     const tngForDisplay = {
-      tng: { "Coal": tng.coal, "Gas": tng.gas, "Hydro": tng.hydro, "Wind": tng.wind, "Solar/Other": tng.other },
-      time: tng.time
+      tng: {
+        "Coal": tng.coal,
+        "Gas": tng.gas,
+        "Nuclear": tng.nuclear,
+        "Hydro": tng.hydro,
+        "Wind": tng.wind,
+        "Solar": tng.solar,
+        "Biomass": tng.biomass,
+        "Diesel": tng.diesel,
+        // if there is explicit Solar entry then skip Solar/Other
+        "Solar/Other": tng.solar ? 0 : tng.other,
+        // if there is explicit Solar entry then add explicit Other (if present)
+        "Imports": tng.imports,
+        "Other": tng.solar ? tng.other : 0
+      },
+      time: tng.time,
+      type: tng.type,
+      sourceUrl: tng.sourceUrl
     };
+
+    tngForDisplay.tng = Object.entries(tngForDisplay.tng)
+    tngForDisplay.tng.sort((x, y) => (y[1] ? y[1] : 0) - (x[1] ? x[1] : 0));
+
     return tngForDisplay;
   }
 );
 
 export {
   selectGlobal,
+  selectRoute,
   createLoadingSelector,
   createErrorSelector,
   createElectricVehicleSelector,
   createIceVehicleSelector,
   createTNGSelector,
   createTNGForDisplaySelector,
-  createConfigSelector
+  createConfigSelector,
+  createProvincesSelector
 };

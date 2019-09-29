@@ -11,7 +11,10 @@
  */
 import { fromJS, toJS } from 'immutable';
 
-import { CHANGE_SELECTED_ELECTRIC_VEHICLE, CHANGE_SELECTED_ICE_VEHICLE, SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE, SET_DEFAULT_SELECTED_ICE_VEHICLE } from './constants';
+import {
+  CHANGE_SELECTED_ELECTRIC_VEHICLE, CHANGE_SELECTED_ICE_VEHICLE, SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE, SET_DEFAULT_SELECTED_ICE_VEHICLE,
+  CHANGE_SELECTED_PROVINCE, SET_DEFAULT_SELECTED_PROVINCE
+} from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -34,6 +37,15 @@ function homeReducer(state = initialState, action) {
     case SET_DEFAULT_SELECTED_ICE_VEHICLE:
       if (action.vehicle && !state.get('selectedIceVehicle')) {
         return state.set('selectedIceVehicle', fromJS(action.vehicle));
+      }
+      return state;
+
+    case CHANGE_SELECTED_PROVINCE:
+      return state.set('selectedProvince', fromJS(action.province));
+
+    case SET_DEFAULT_SELECTED_PROVINCE:
+      if (action.province && !state.get('selectedProvince')) {
+        return state.set('selectedProvince', fromJS(action.province));
       }
       return state;
 

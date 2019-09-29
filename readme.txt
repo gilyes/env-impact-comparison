@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.4 =
+* Added multi-province support.
+
 = 1.3.1 =
 * Tweaked text input style.
 

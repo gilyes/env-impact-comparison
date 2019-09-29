@@ -9,6 +9,24 @@ import { toJS } from 'immutable';
 
 const selectHome = (state) => state.get('home');
 
+const createSelectedProvinceSelector = () => createSelector(
+  selectHome,
+  (state) => {
+    const result = state.get('selectedProvince');
+    return result ? result.toJS() : null;
+  }
+);
+
+const createDefaultSelectedProvinceSelector = () => createSelector(
+  createConfigSelector(),
+  (config) => {
+    if (!config || !config.provinces) {
+      return null;
+    }
+    return config.provinces.find(x => x.name === config.defaultProvince.name);
+  }
+);
+
 const createSelectedElectricVehicleSelector = () => createSelector(
   selectHome,
   (state) => {
@@ -63,18 +81,33 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
   createTNGSelector(),
   createSelectedElectricVehicleSelector(),
   (tng, vehicle) => {
-    if (!vehicle || !vehicle.consumption || !tng || !tng.coal || !tng.gas || !tng.hydro || !tng.wind || !tng.other || !tng.total) {
+    if (!vehicle || !vehicle.consumption || !tng) {
       return "N/A";
     }
 
-    let coalPercentage = tng.coal / tng.total;
-    let gasPercentage = tng.gas / tng.total;
-    let hydroPercentage = tng.hydro / tng.total;
-    let windPercentage = tng.wind / tng.total;
-    let otherPercentage = tng.other / tng.total;
+    let coal = (tng.coal ? tng.coal : 0) / 100;
+    let gas = (tng.gas ? tng.gas : 0) / 100;
+    let hydro = (tng.hydro ? tng.hydro : 0) / 100;
+    let wind = (tng.wind ? tng.wind : 0) / 100;
+    let nuclear = (tng.nuclear ? tng.nuclear : 0) / 100;
+    let solar = (tng.solar ? tng.solar : 0) / 100;
+    let biomass = (tng.biomass ? tng.biomass : 0) / 100;
+    let diesel = (tng.diesel ? tng.diesel : 0) / 100;
+    let imports = (tng.imports ? tng.imports : 0) / 100;
+    let other = (tng.other ? tng.other : 0) / 100;
 
     //(USER DEFINED EV kWh/100km) X ([0.909kg/kWh X TNG COAL%] + [0.465kg/kWh X TNG GAS%] + [0.000kg/kWh X TNG HYDRO%] + [0.000kg/kWh X TNG WIND%] [1.5kg/kWh X TNG OTHER%])
-    let result = vehicle.consumption * (0.909 * coalPercentage + 0.465 * gasPercentage + 0 * hydroPercentage + 0 * windPercentage + 1.5 * otherPercentage);
+    let result = vehicle.consumption * (
+      0.909 * coal +
+      0.465 * gas +
+      0 * hydro +
+      0 * wind +
+      0 * nuclear +
+      0 * solar +
+      1.5 * biomass +
+      0.25 * diesel +
+      (0.465/2) * imports +
+      1.5 * other);
     return round(result, 2);
   }
 );
@@ -164,6 +197,8 @@ function round(value, decimals) {
 
 export {
   selectHome,
+  createSelectedProvinceSelector,
+  createDefaultSelectedProvinceSelector,
   createSelectedElectricVehicleSelector,
   createSelectedIceVehicleSelector,
   createElectricVehicleCarbonEquivalentEmittedSelector,

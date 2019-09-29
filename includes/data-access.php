@@ -12,12 +12,18 @@ class EnvImpactComparison_DataAccess
 
         $charset_collate = $wpdb->get_charset_collate();
 
+        // drop TNG table if contains obsolete id column (changing primary key which is not supported by dbDelta)
+        $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$tng_table_name' AND column_name = 'id'");
+        if (!empty($row)) {
+            $wpdb->query("DROP TABLE IF EXISTS $tng_table_name;");
+        }
+
         $sql = "
         CREATE TABLE $tng_table_name (
-            id mediumint(9) NOT NULL,
+			provinceId varchar(10) DEFAULT '' NOT NULL,
 			tng varchar(1000) DEFAULT '' NOT NULL,
 			time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (provinceId)
         ) $charset_collate;
 
         CREATE TABLE $electric_vehicles_table_name (
@@ -40,7 +46,7 @@ class EnvImpactComparison_DataAccess
         dbDelta($sql);
     }
 
-    public static function save_tng($tng)
+    public static function save_tng($tng, $provinceId)
     {
         global $wpdb;
 
@@ -49,7 +55,7 @@ class EnvImpactComparison_DataAccess
         $wpdb->replace(
             $table_name,
             array(
-                'id' => 1,
+                'provinceId' => $provinceId,
                 'tng' => json_encode($tng),
                 'time' => current_time('mysql'),
             ),
@@ -61,7 +67,7 @@ class EnvImpactComparison_DataAccess
         );
     }
 
-    public static function get_tng()
+    public static function get_tng($provinceId)
     {
         global $wpdb;
 
@@ -69,9 +75,9 @@ class EnvImpactComparison_DataAccess
 
         $tngs = $wpdb->get_results(
             "
-            SELECT tng, time
+            SELECT tng, time, provinceId
             FROM $table_name
-            WHERE id = 1
+            WHERE provinceId = '$provinceId'
             "
         );
         if (count($tngs) == 0) {
@@ -129,7 +135,7 @@ class EnvImpactComparison_DataAccess
                 array(
                     'name' => $v->name,
                     'consumption' => $v->consumption,
-                    'pictureUrl' => $v->pictureUrl 
+                    'pictureUrl' => $v->pictureUrl,
                 ),
                 array(
                     '%s',
@@ -167,7 +173,7 @@ class EnvImpactComparison_DataAccess
             "
         );
 
-        return $vehicles? $vehicles[0] : NULL;
+        return $vehicles ? $vehicles[0] : null;
     }
 
     private static function get_tng_table_name()

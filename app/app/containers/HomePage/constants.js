@@ -13,3 +13,5 @@ export const CHANGE_SELECTED_ELECTRIC_VEHICLE = 'env-impact-comparison/Home/CHAN
 export const CHANGE_SELECTED_ICE_VEHICLE = 'env-impact-comparison/Home/CHANGE_SELECTED_ICE_VEHICLE';
 export const SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE = 'env-impact-comparison/Home/SET_DEFAULT_SELECTED_ELECTRIC_VEHICLE';
 export const SET_DEFAULT_SELECTED_ICE_VEHICLE = 'env-impact-comparison/Home/SET_DEFAULT_SELECTED_ICE_VEHICLE';
+export const CHANGE_SELECTED_PROVINCE = 'env-impact-comparison/Home/CHANGE_SELECTED_PROVINCE';
+export const SET_DEFAULT_SELECTED_PROVINCE = 'env-impact-comparison/Home/SET_DEFAULT_SELECTED_PROVINCE';

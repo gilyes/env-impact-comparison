@@ -1,6 +1,7 @@
 <?php
 
 require_once 'data-access.php';
+require_once 'tng.php';
 
 class EnvImpactComparison_Api
 {
@@ -16,47 +17,32 @@ class EnvImpactComparison_Api
 
     public static function get_tng($request)
     {
-        $cachedTNG = EnvImpactComparison_DataAccess::get_tng();
+        $provinceId = $request['id'];
+        if (!isset($provinceId)) {
+            $provinceId = "AB";
+        }
+
+        $cachedTNG = EnvImpactComparison_DataAccess::get_tng($provinceId);
         $tng = new stdClass;
         if (isset($cachedTNG) && isset($cachedTNG->time)) {
             $tng = json_decode($cachedTNG->tng);
-
-            $minTime = new DateTime();
-            $minTime->modify("-2 minutes");
             $cacheTime = new DateTime($cachedTNG->time);
-            if ($cacheTime > $minTime) {
+            if (EnvImpactComparison_TngLoader::is_tng_time_current($provinceId, $cacheTime)) {
                 return json_decode($cachedTNG->tng);
             }
         }
 
-        @$htmlContent = file_get_contents("http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet");
-        if ($htmlContent === false) {
+        $newTng = EnvImpactComparison_TngLoader::get_tng($provinceId);
+
+        if (!isset($newTng)) {
             return $tng;
         }
 
-        $dom = new DOMDocument();
-        @$dom->loadHTML($htmlContent);
+        $newTng->time = (new DateTime('now', new DateTimeZone('America/Edmonton')))->format("Y-m-d h:i A");
+        $newTng->provinceId = $provinceId;
+        EnvImpactComparison_DataAccess::save_tng($newTng, $provinceId);
 
-        $xpath = new DOMXPath($dom);
-
-        foreach ($xpath->query("//table[tr/th[1] = 'GENERATION']")->item(0)->getElementsByTagName('tr') as $rows) {
-            $cells = $rows->getElementsByTagName('td');
-
-            $typeNode = $cells->item(0);
-            $tngNode = $cells->item(2);
-
-            if (isset($typeNode)) {
-                $type = trim(strtolower($typeNode->textContent));
-                if ($type !== 'group') {
-                    $tng->{$type} = $tngNode->textContent;
-                }
-            }
-        }
-
-        $tng->time = (new DateTime('now', new DateTimeZone('America/Edmonton')))->format("Y-m-d h:i A");
-        EnvImpactComparison_DataAccess::save_tng($tng);
-
-        return $tng;
+        return $newTng;
     }
 
     public static function get_config()
@@ -72,6 +58,21 @@ class EnvImpactComparison_Api
                 'annualDistanceDriven' => $options['default_annual_distance_driven'] ?? '',
                 'fuelCost' => $options['default_fuel_cost'] ?? '',
                 'electricityRate' => $options['default_electricity_rate'] ?? ''],
+            'provinces' => [
+                (object) ['name' => 'Alberta', 'id' => 'AB'],
+                (object) ['name' => 'British Columbia', 'id' => 'BC'],
+                (object) ['name' => 'Manitoba', 'id' => 'MB'],
+                (object) ['name' => 'New Brunswick', 'id' => 'NB'],
+                (object) ['name' => 'Newfoundland and Labrador', 'id' => 'NL'],
+                (object) ['name' => 'Nortwest Territories', 'id' => 'NT'],
+                (object) ['name' => 'Nova Scotia', 'id' => 'NS'],
+                (object) ['name' => 'Ontario', 'id' => 'ON'],
+                (object) ['name' => 'Prince Edward Island', 'id' => 'PE'],
+                (object) ['name' => 'Quebec', 'id' => 'QC'],
+                (object) ['name' => 'Saskatchewan', 'id' => 'SK'],
+                (object) ['name' => 'Yukon', 'id' => 'YT'],
+            ],
+            'defaultProvince' => (object) ['name' => 'Alberta', 'id' => 'AB'],
         ];
     }
 

@@ -5,7 +5,7 @@
  * Plugin Name:       env-impact-comparison
  * Plugin URI:        https://github.com/gilyes/env-impact-comparison
  * Description:       Vehicle environmental impact comparison view.
- * Version:           1.3.1
+ * Version:           1.4
  * Author:            George Ilyes
  * Author URI:        https://gilyes.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-define('PLUGIN_NAME_VERSION', '1.3.1');
+define('PLUGIN_NAME_VERSION', '1.4');
 
 function activate_env_impact_comparison()
 {
