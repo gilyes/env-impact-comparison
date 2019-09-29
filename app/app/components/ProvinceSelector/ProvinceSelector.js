@@ -43,6 +43,7 @@ const ProvinceSelector = (props) => {
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.name}
         isSearchable={false}
+        maxMenuHeight={500}
         noOptionsMessage={() => props.error ? "Load error." : "Loading..."}
         placeholder={props.placeholder} />
     </div>

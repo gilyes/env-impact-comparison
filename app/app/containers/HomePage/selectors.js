@@ -93,6 +93,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
     let solar = (tng.solar ? tng.solar : 0) / 100;
     let biomass = (tng.biomass ? tng.biomass : 0) / 100;
     let diesel = (tng.diesel ? tng.diesel : 0) / 100;
+    let imports = (tng.imports ? tng.imports : 0) / 100;
     let other = (tng.other ? tng.other : 0) / 100;
 
     //(USER DEFINED EV kWh/100km) X ([0.909kg/kWh X TNG COAL%] + [0.465kg/kWh X TNG GAS%] + [0.000kg/kWh X TNG HYDRO%] + [0.000kg/kWh X TNG WIND%] [1.5kg/kWh X TNG OTHER%])
@@ -105,6 +106,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
       0 * solar +
       1.5 * biomass +
       0.25 * diesel +
+      (0.465/2) * imports +
       1.5 * other);
     return round(result, 2);
   }

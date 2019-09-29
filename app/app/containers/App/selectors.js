@@ -63,10 +63,16 @@ const createTNGForDisplaySelector = () => createSelector(
         // if there is explicit Solar entry then skip Solar/Other
         "Solar/Other": tng.solar ? 0 : tng.other,
         // if there is explicit Solar entry then add explicit Other (if present)
+        "Imports": tng.imports,
         "Other": tng.solar ? tng.other : 0
       },
-      time: tng.time
+      time: tng.time,
+      type: tng.type,
+      sourceUrl: tng.sourceUrl
     };
+
+    tngForDisplay.tng = Object.entries(tngForDisplay.tng)
+    tngForDisplay.tng.sort((x, y) => (y[1] ? y[1] : 0) - (x[1] ? x[1] : 0));
 
     return tngForDisplay;
   }

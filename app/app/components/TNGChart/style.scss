@@ -2,3 +2,37 @@ svg[aria-label="A chart."]>g>g:last-child {
     // HACK: working around a bug in Google Pie Chart that causes flickering tooltip. from https://stackoverflow.com/a/39775254/573447
     pointer-events: none
 }
+
+.tng-update-info-container {
+  text-align: right;
+  margin-right: 9px;
+}
+
+.tng-type-live,
+.tng-type-historical {
+  display: inline-block;
+}
+
+.tng-type-live{
+  color: black;
+  background-color: green;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+}
+
+.tng-type-historical {
+  color: black;
+  background-color: gray;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px
+}
+
+.tng-update-time {
+  display: inline-block;
+}

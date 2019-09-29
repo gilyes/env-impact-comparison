@@ -60,7 +60,17 @@ class EnvImpactComparison_Api
                 'electricityRate' => $options['default_electricity_rate'] ?? ''],
             'provinces' => [
                 (object) ['name' => 'Alberta', 'id' => 'AB'],
+                (object) ['name' => 'British Columbia', 'id' => 'BC'],
+                (object) ['name' => 'Manitoba', 'id' => 'MB'],
+                (object) ['name' => 'New Brunswick', 'id' => 'NB'],
+                (object) ['name' => 'Newfoundland and Labrador', 'id' => 'NL'],
+                (object) ['name' => 'Nortwest Territories', 'id' => 'NT'],
+                (object) ['name' => 'Nova Scotia', 'id' => 'NS'],
                 (object) ['name' => 'Ontario', 'id' => 'ON'],
+                (object) ['name' => 'Prince Edward Island', 'id' => 'PE'],
+                (object) ['name' => 'Quebec', 'id' => 'QC'],
+                (object) ['name' => 'Saskatchewan', 'id' => 'SK'],
+                (object) ['name' => 'Yukon', 'id' => 'YT'],
             ],
             'defaultProvince' => (object) ['name' => 'Alberta', 'id' => 'AB'],
         ];
