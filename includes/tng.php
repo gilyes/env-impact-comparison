@@ -91,14 +91,23 @@ class EnvImpactComparison_TngLoader
             $tngNode = $cells->item(2);
 
             if (isset($typeNode)) {
-                $type = trim(strtolower($typeNode->textContent));
+                $type = str_replace(" ", "", trim(strtolower($typeNode->textContent)));
                 if ($type !== 'group') {
                     $tng->{$type} = $tngNode->textContent;
                 }
             }
         }
 
-        $total = ($tng->coal ?? 0) + ($tng->gas ?? 0) + ($tng->hydro ?? 0) + ($tng->wind ?? 0) + ($tng->other ?? 0);
+        $total =
+            ($tng->coal ?? 0) +
+            ($tng->gas ?? 0) +
+            ($tng->hydro ?? 0) +
+            ($tng->wind ?? 0) +
+            ($tng->solar ?? 0) +
+            ($tng->dualfuel ?? 0) +
+            ($tng->energystorage ?? 0) +
+            ($tng->other ?? 0);
+
         if ($total == 0) {
             return (object) [];
         }
@@ -108,9 +117,12 @@ class EnvImpactComparison_TngLoader
             'gas' => ($tng->gas ?? 0) * 100 / $total,
             'hydro' => ($tng->hydro ?? 0) * 100 / $total,
             'wind' => ($tng->wind ?? 0) * 100 / $total,
+            'solar' => ($tng->solar ?? 0) * 100 / $total,
+            'dualFuel' => ($tng->dualfuel ?? 0) * 100 / $total,
+            'energyStorage' => ($tng->energystorage ?? 0) * 100 / $total,
             'other' => ($tng->other ?? 0) * 100 / $total,
             'type' => 'live',
-            'sourceUrl' => 'http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet'
+            'sourceUrl' => 'http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet',
         ];
     }
 

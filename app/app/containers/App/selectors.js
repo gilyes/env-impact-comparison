@@ -60,6 +60,8 @@ const createTNGForDisplaySelector = () => createSelector(
         "Solar": tng.solar,
         "Biomass": tng.biomass,
         "Diesel": tng.diesel,
+        "Dual Fuel": tng.dualFuel,
+        "Energy Storage": tng.energyStorage,
         // if there is explicit Solar entry then skip Solar/Other
         "Solar/Other": tng.solar ? 0 : tng.other,
         // if there is explicit Solar entry then add explicit Other (if present)

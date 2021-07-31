@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.5 =
+* Added solar, dual fuel, energy storage sources for Alberta.
+
 = 1.4 =
 * Added multi-province support.
 
