@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.6 =
+* Fixed dual fuel calculations for Alberta.
+
 = 1.5 =
 * Added solar, dual fuel, energy storage sources for Alberta.
 
