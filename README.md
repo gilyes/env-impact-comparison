@@ -42,3 +42,5 @@ npm start
 ./package.sh <version>
 ```
 
+### Used by
+http://www.albertaev.ca/why-electric/
