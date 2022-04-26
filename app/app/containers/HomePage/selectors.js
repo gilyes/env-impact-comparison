@@ -107,7 +107,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
       0 * nuclear +
       0 * solar +
       1.5 * biomass +
-      0.25 * diesel +
+      0.75 * diesel +
       (0.465 + 0.909) / 2 * dualFuel + // dual fuel: gas and coal
       0 * energyStorage +
       (0.465/2) * imports +

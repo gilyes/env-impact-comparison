@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.7 =
+* Updated diesel coefficient to 0.75.
+
 = 1.6 =
 * Fixed dual fuel calculations for Alberta.
 
