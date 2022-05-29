@@ -110,7 +110,7 @@ const createElectricVehicleCarbonEquivalentEmittedSelector = () => createSelecto
       0.75 * diesel +
       (0.465 + 0.909) / 2 * dualFuel + // dual fuel: gas and coal
       0 * energyStorage +
-      (0.465/2) * imports +
+      (0.465 / 2) * imports +
       1.5 * other);
     return round(result, 2);
   }
@@ -146,7 +146,11 @@ const createIceVehicleCarbonEquivalentEmittedSelector = () => createSelector(
       return "N/A";
     }
 
-    return round(vehicle.consumption * 2.44, 1);
+    // gas: 2.44 kg CO2eq/L
+    // diesel: 2.681 kg CO2eq/L
+    var emissionPerLiter = vehicle.fuelType === 'D' ? 2.681 : 2.44;
+
+    return round(vehicle.consumption * emissionPerLiter, 1);
   }
 );
 
