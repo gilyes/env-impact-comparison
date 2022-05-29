@@ -31,6 +31,7 @@ class EnvImpactComparison_DataAccess
             name varchar(100) DEFAULT '' NOT NULL,
             consumption decimal(6,2) DEFAULT 0 NOT NULL,
 			pictureUrl varchar(500) DEFAULT '' NOT NULL,
+			fuelType varchar(1) DEFAULT 'E' NOT NULL,
             PRIMARY KEY  (id)
         ) $charset_collate;
 
@@ -39,6 +40,7 @@ class EnvImpactComparison_DataAccess
             name varchar(100) DEFAULT '' NOT NULL,
             consumption decimal(6,2) DEFAULT 0 NOT NULL,
 			pictureUrl varchar(500) DEFAULT '' NOT NULL,
+			fuelType varchar(1) DEFAULT 'G' NOT NULL,
             PRIMARY KEY  (id)
         ) $charset_collate;";
 
@@ -136,8 +138,10 @@ class EnvImpactComparison_DataAccess
                     'name' => $v->name,
                     'consumption' => $v->consumption,
                     'pictureUrl' => $v->pictureUrl,
+                    'fuelType' => $v->fuelType,
                 ),
                 array(
+                    '%s',
                     '%s',
                     '%s',
                     '%s',
@@ -152,7 +156,7 @@ class EnvImpactComparison_DataAccess
 
         $vehicles = $wpdb->get_results(
             "
-            SELECT name, consumption, pictureUrl
+            SELECT name, consumption, pictureUrl, fuelType
             FROM $table_name
             "
         );
@@ -166,7 +170,7 @@ class EnvImpactComparison_DataAccess
 
         $vehicles = $wpdb->get_results(
             "
-            SELECT name, consumption, pictureUrl
+            SELECT name, consumption, pictureUrl, fuelType
             FROM $table_name
             WHERE name = '$name'
             LIMIT 1
