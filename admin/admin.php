@@ -71,7 +71,7 @@ class EnvImpactComparison_Admin
             $content = $this->read_uploaded_file($_FILES["electric-vehicles-csv"]);
             if (isset($content)) {
                 require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
-                $vehicles = self::csv_to_vehicle_array($content);
+                $vehicles = self::csv_to_vehicle_array($content, 'E');
                 if (isset($vehicles)) {
                     EnvImpactComparison_DataAccess::save_electric_vehicles($vehicles);
                 }
@@ -87,7 +87,7 @@ class EnvImpactComparison_Admin
             $content = $this->read_uploaded_file($_FILES["ice-vehicles-csv"]);
             if (isset($content)) {
                 require_once plugin_dir_path(dirname(__FILE__)) . 'includes/data-access.php';
-                $vehicles = self::csv_to_vehicle_array($content);
+                $vehicles = self::csv_to_vehicle_array($content, 'G');
                 if (isset($vehicles)) {
                     EnvImpactComparison_DataAccess::save_ice_vehicles($vehicles);
                 }
@@ -97,7 +97,7 @@ class EnvImpactComparison_Admin
         return $option;
     }
 
-    private static function csv_to_vehicle_array($text)
+    private static function csv_to_vehicle_array($text, $defaultFuelType)
     {
         $text = trim($text);
         $csv = array_map('str_getcsv', preg_split("/\r\n|\n|\r/", $text));
@@ -105,7 +105,7 @@ class EnvImpactComparison_Admin
         try {
             foreach ($csv as $vehicle) {
                 if (count($vehicle) < 3) {
-                    add_settings_error('env_impact_comparison_settings', esc_attr('settings_updated'), "Invalid CSV, must have 3 columns (name, consumption, pictureUrl).", 'error');
+                    add_settings_error('env_impact_comparison_settings', esc_attr('settings_updated'), "Invalid CSV, must have 3 or 4 columns (name, consumption, pictureUrl[, fuelType]).", 'error');
                     return null;
                 }
 
@@ -113,6 +113,7 @@ class EnvImpactComparison_Admin
                     'name' => $vehicle[0],
                     'consumption' => $vehicle[1],
                     'pictureUrl' => $vehicle[2],
+                    'fuelType' => count($vehicle) >= 4 ? $vehicle[3] : $defaultFuelType
                 ]);
             }
         } catch (Exception $e) {
@@ -136,7 +137,7 @@ class EnvImpactComparison_Admin
 
         echo '<h3>Instructions</h3>';
         echo '<p>Select one or both files then <b>press Save Changes</b> to update the list of vehicles.</p>';
-        echo '<p>The format of these CSV files is: <code>vehicle_name, consumption (number), picture_url</code>. Do not include column headers in the files.</p>';
+        echo '<p>The format of these CSV files is: <code>vehicle_name, consumption (number), picture_url, [fuel_type (ICE only; \'G\', \'D\')]</code>. Do not include column headers in the files.</p>';
         submit_button();
 
         echo '</form></div>';

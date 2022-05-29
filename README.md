@@ -7,7 +7,7 @@ WordPress plugin that displays and compares the environmental impact of various 
 * Download latest release from <https://github.com/gilyes/env-impact-comparison/releases>
 * Upload and activate plugin.
 * On the plugin's Settings page upload CSV files containing EV and ICE vehicle data.
-  * The format of these CSV files is: vehicle_name, consumption (number), picture_url
+  * The format of these CSV files is: vehicle_name, consumption (number), picture_url, fuel_type ('G', 'D')
   * Do not add header row to CSV.
 * Add the shortcode `[env-impact-comparison]` to a page.
 

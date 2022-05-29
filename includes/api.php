@@ -75,20 +75,4 @@ class EnvImpactComparison_Api
             'defaultProvince' => (object) ['name' => 'Alberta', 'id' => 'AB'],
         ];
     }
-
-    public static function read_vehicles($fileName)
-    {
-        $csv = array_map('str_getcsv', file($fileName));
-
-        $vehicles = [];
-        foreach ($csv as $vehicle) {
-            array_push($vehicles, (object) [
-                'name' => $vehicle[0],
-                'consumption' => $vehicle[1],
-                'pictureUrl' => $vehicle[2],
-            ]);
-        }
-
-        return $vehicles;
-    }
 }

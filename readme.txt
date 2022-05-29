@@ -15,10 +15,13 @@ Displays and compares the environmental impact of various electric and gas vehic
 1. Upload plugin.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Upload EV/ICE CSV files on the plugin settings page.
-  * CSV format: vehicle_name, consumption (number), picture_url
+  * CSV format: vehicle_name, consumption (number), picture_url, fuel_type ('G', 'D')
 4. Use shortcode [env-impact-comparison].
  
 == Changelog ==
+
+= 1.8 =
+* Added support for diesel vehicles.
 
 = 1.7 =
 * Updated diesel coefficient to 0.75.
