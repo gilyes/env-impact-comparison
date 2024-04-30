@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.9 =
+* Updated the update-checker to version 5.4.
+
 = 1.8 =
 * Added support for diesel vehicles.
 
