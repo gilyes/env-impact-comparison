@@ -36,7 +36,7 @@ function deactivate_env_impact_comparison()
 function setup_env_impact_comparison_update_checker()
 {
     require_once plugin_dir_path(__FILE__) . 'utils/plugin-update-checker/plugin-update-checker.php';
-    $updateChecker = Puc_v4_Factory::buildUpdateChecker('https://github.com/gilyes/env-impact-comparison', __FILE__, 'env-impact-comparison');
+    $updateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker('https://github.com/gilyes/env-impact-comparison', __FILE__, 'env-impact-comparison');
     $updateChecker->getVcsApi()->enableReleaseAssets();
 }
 
