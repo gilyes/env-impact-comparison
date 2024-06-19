@@ -20,6 +20,9 @@ Displays and compares the environmental impact of various electric and gas vehic
  
 == Changelog ==
 
+= 1.10 =
+* Stop plugin from overwriting page title.
+
 = 1.9 =
 * Updated the update-checker to version 5.4.
 
