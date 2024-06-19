@@ -39,10 +39,6 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   render() {
     return (
       <article>
-        <Helmet>
-          <title>Home Page</title>
-          <meta name="description" content="Home Page" />
-        </Helmet>
         <div className="home-page">
           <section>
             <div>

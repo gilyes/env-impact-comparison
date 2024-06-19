@@ -17,12 +17,6 @@ import './style.scss';
 
 const App = () => (
   <div className="app-wrapper">
-    <Helmet
-      titleTemplate="%s"
-      defaultTitle="Environmental Impact Comparison"
-    >
-      <meta name="description" content="Environmental impact comparison between selected vehicles." />
-    </Helmet>
     <Header />
     <Switch>
       <Route path="" component={HomePage} />
